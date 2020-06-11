@@ -8,15 +8,14 @@ terraform {
 
 provider "aws" {
   version = "v2.30.0"
-  region  = "eu-west-1"
-
+  region  = var.region
 }
 
 module "this" {
   source          = "../../.."
   namespace       = "adaptavist-terraform"
   stage           = "integration"
-  function_name   = "hello-world"
+  function_name   = var.function_name
   description     = "test hello world lambda"
   lambda_code_dir = "src"
   handler         = "main.handler"

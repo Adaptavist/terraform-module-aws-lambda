@@ -86,5 +86,5 @@ variable "vpc_security_group_ids" {
 variable "ssm_parameter_names" {
   description = "Names of SSM parameters that lambda will be able to access"
   type        = list(string)
-  default     = ""
+  default     = []
 }
