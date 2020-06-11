@@ -1,0 +1,164 @@
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 retry.go:72: terraform [init -upgrade=false -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 logger.go:66: Running command terraform with args [init -upgrade=false -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 logger.go:66: Initializing modules...
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 logger.go:66: Initializing the backend...
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:15+01:00 logger.go:66: Initializing provider plugins...
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: The following providers do not have any version constraints in configuration,
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: so the latest version was installed.
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: To prevent automatic upgrades to new major versions that may contain breaking
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: changes, it is recommended to add version = "..." constraints to the
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: corresponding provider blocks in configuration, with the constraint strings
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: suggested below.
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: * provider.archive: version = "~> 1.3"
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: Terraform has been successfully initialized!
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: You may now begin working with Terraform. Try running "terraform plan" to see
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: any changes that are required for your infrastructure. All Terraform commands
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: should now work.
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: If you ever set or change modules or backend configuration for Terraform,
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: rerun this command to reinitialize your working directory. If you forget, other
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: commands will detect it and remind you to do so if necessary.
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 retry.go:72: terraform [get -update -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: Running command terraform with args [get -update -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: - this in ../../..
+TestModuleCreatesLambda 2020-06-11T18:13:16+01:00 logger.go:66: Downloading git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.4.0 for this.labels...
+TestModuleCreatesLambda 2020-06-11T18:13:18+01:00 logger.go:66: - this.labels in .terraform/modules/this.labels
+TestModuleCreatesLambda 2020-06-11T18:13:18+01:00 retry.go:72: terraform [apply -input=false -auto-approve -var region=eu-west-1 -var function_name=terratest-aws-lambda-example-AyIGGK -lock=false -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:18+01:00 logger.go:66: Running command terraform with args [apply -input=false -auto-approve -var region=eu-west-1 -var function_name=terratest-aws-lambda-example-AyIGGK -lock=false -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:19+01:00 logger.go:66: module.this.data.archive_file.this: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:21+01:00 logger.go:66: module.this.data.aws_caller_identity.this: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:21+01:00 logger.go:66: module.this.data.aws_region.this: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:21+01:00 logger.go:66: module.this.data.aws_iam_policy_document.kms_policy_document: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:21+01:00 logger.go:66: module.this.data.aws_iam_policy_document.assume_role_policy: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:26+01:00 logger.go:66: module.this.aws_iam_role.this: Creating...
+TestModuleCreatesLambda 2020-06-11T18:13:27+01:00 logger.go:66: module.this.aws_iam_role.this: Creation complete after 1s [id=terratest-aws-lambda-example-AyIGGK-eu-west-1]
+TestModuleCreatesLambda 2020-06-11T18:13:27+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Creating...
+TestModuleCreatesLambda 2020-06-11T18:13:27+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Creating...
+TestModuleCreatesLambda 2020-06-11T18:13:27+01:00 logger.go:66: module.this.aws_lambda_function.this: Creating...
+TestModuleCreatesLambda 2020-06-11T18:13:28+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Creation complete after 1s [id=terratest-aws-lambda-example-AyIGGK-eu-west-1-20200611171328090200000002]
+TestModuleCreatesLambda 2020-06-11T18:13:28+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Creation complete after 1s [id=terratest-aws-lambda-example-AyIGGK-eu-west-1-20200611171328076500000001]
+TestModuleCreatesLambda 2020-06-11T18:13:37+01:00 logger.go:66: module.this.aws_lambda_function.this: Still creating... [10s elapsed]
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: module.this.aws_lambda_function.this: Creation complete after 17s [id=terratest-aws-lambda-example-AyIGGK]
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: The state of your infrastructure has been saved to the path
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: below. This state is required to modify and destroy your
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: infrastructure, so keep it safe. To inspect the complete state
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: use the `terraform show` command.
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:44+01:00 logger.go:66: State path: terraform.tfstate
+invoking lambda...
+TestModuleCreatesLambda 2020-06-11T18:13:45+01:00 retry.go:72: terraform [destroy -auto-approve -input=false -var region=eu-west-1 -var function_name=terratest-aws-lambda-example-AyIGGK -lock=false -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:45+01:00 logger.go:66: Running command terraform with args [destroy -auto-approve -input=false -var region=eu-west-1 -var function_name=terratest-aws-lambda-example-AyIGGK -lock=false -no-color]
+TestModuleCreatesLambda 2020-06-11T18:13:46+01:00 logger.go:66: module.this.data.archive_file.this: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:48+01:00 logger.go:66: module.this.data.aws_caller_identity.this: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:48+01:00 logger.go:66: module.this.data.aws_region.this: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:48+01:00 logger.go:66: module.this.data.aws_iam_policy_document.kms_policy_document: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:48+01:00 logger.go:66: module.this.data.aws_iam_policy_document.assume_role_policy: Refreshing state...
+TestModuleCreatesLambda 2020-06-11T18:13:48+01:00 logger.go:66: module.this.aws_iam_role.this: Refreshing state... [id=terratest-aws-lambda-example-AyIGGK-eu-west-1]
+TestModuleCreatesLambda 2020-06-11T18:13:49+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Refreshing state... [id=terratest-aws-lambda-example-AyIGGK-eu-west-1-20200611171328090200000002]
+TestModuleCreatesLambda 2020-06-11T18:13:49+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Refreshing state... [id=terratest-aws-lambda-example-AyIGGK-eu-west-1-20200611171328076500000001]
+TestModuleCreatesLambda 2020-06-11T18:13:49+01:00 logger.go:66: module.this.aws_lambda_function.this: Refreshing state... [id=terratest-aws-lambda-example-AyIGGK]
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Destroying... [id=terratest-aws-lambda-example-AyIGGK-eu-west-1-20200611171328090200000002]
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Destroying... [id=terratest-aws-lambda-example-AyIGGK-eu-west-1-20200611171328076500000001]
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_lambda_function.this: Destroying... [id=terratest-aws-lambda-example-AyIGGK]
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_lambda_function.this: Destruction complete after 0s
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Destruction complete after 1s
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Destruction complete after 1s
+TestModuleCreatesLambda 2020-06-11T18:13:52+01:00 logger.go:66: module.this.aws_iam_role.this: Destroying... [id=terratest-aws-lambda-example-AyIGGK-eu-west-1]
+TestModuleCreatesLambda 2020-06-11T18:13:53+01:00 logger.go:66: module.this.aws_iam_role.this: Destruction complete after 1s
+TestModuleCreatesLambda 2020-06-11T18:13:53+01:00 logger.go:66: 
+TestModuleCreatesLambda 2020-06-11T18:13:53+01:00 logger.go:66: Destroy complete! Resources: 4 destroyed.
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:53+01:00 retry.go:72: terraform [init -upgrade=false -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:53+01:00 logger.go:66: Running command terraform with args [init -upgrade=false -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: Initializing modules...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: Initializing the backend...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: Initializing provider plugins...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: The following providers do not have any version constraints in configuration,
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: so the latest version was installed.
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: To prevent automatic upgrades to new major versions that may contain breaking
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: changes, it is recommended to add version = "..." constraints to the
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: corresponding provider blocks in configuration, with the constraint strings
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: suggested below.
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: * provider.archive: version = "~> 1.3"
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: Terraform has been successfully initialized!
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: You may now begin working with Terraform. Try running "terraform plan" to see
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: any changes that are required for your infrastructure. All Terraform commands
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: should now work.
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: If you ever set or change modules or backend configuration for Terraform,
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: rerun this command to reinitialize your working directory. If you forget, other
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: commands will detect it and remind you to do so if necessary.
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 retry.go:72: terraform [get -update -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:54+01:00 logger.go:66: Running command terraform with args [get -update -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:55+01:00 logger.go:66: - this in ../../..
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:55+01:00 logger.go:66: Downloading git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.4.0 for this.labels...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:56+01:00 logger.go:66: - this.labels in .terraform/modules/this.labels
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:56+01:00 retry.go:72: terraform [apply -input=false -auto-approve -var region=eu-west-1 -var function_name=terratest-aws-lambda-example-M9SAzE -lock=false -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:56+01:00 logger.go:66: Running command terraform with args [apply -input=false -auto-approve -var region=eu-west-1 -var function_name=terratest-aws-lambda-example-M9SAzE -lock=false -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:58+01:00 logger.go:66: module.this.data.archive_file.this: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:59+01:00 logger.go:66: module.this.data.aws_region.this: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:59+01:00 logger.go:66: module.this.data.aws_caller_identity.this: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:59+01:00 logger.go:66: module.this.data.aws_iam_policy_document.kms_policy_document: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:13:59+01:00 logger.go:66: module.this.data.aws_iam_policy_document.assume_role_policy: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:03+01:00 logger.go:66: module.this.aws_iam_role.this: Creating...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:04+01:00 logger.go:66: module.this.aws_iam_role.this: Creation complete after 1s [id=terratest-aws-lambda-example-M9SAzE-eu-west-1]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:04+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Creating...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:04+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Creating...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:04+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.aws_xray_write_only_access[0]: Creating...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:04+01:00 logger.go:66: module.this.aws_lambda_function.this: Creating...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:05+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.aws_xray_write_only_access[0]: Creation complete after 1s [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405330300000003]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:05+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Creation complete after 1s [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405321900000002]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:05+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Creation complete after 1s [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405300700000001]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:14+01:00 logger.go:66: module.this.aws_lambda_function.this: Still creating... [10s elapsed]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: module.this.aws_lambda_function.this: Creation complete after 17s [id=terratest-aws-lambda-example-M9SAzE]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: The state of your infrastructure has been saved to the path
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: below. This state is required to modify and destroy your
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: infrastructure, so keep it safe. To inspect the complete state
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: use the `terraform show` command.
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:21+01:00 logger.go:66: State path: terraform.tfstate
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:22+01:00 retry.go:72: terraform [destroy -auto-approve -input=false -var function_name=terratest-aws-lambda-example-M9SAzE -var region=eu-west-1 -lock=false -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:22+01:00 logger.go:66: Running command terraform with args [destroy -auto-approve -input=false -var function_name=terratest-aws-lambda-example-M9SAzE -var region=eu-west-1 -lock=false -no-color]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:24+01:00 logger.go:66: module.this.data.archive_file.this: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.data.aws_caller_identity.this: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.data.aws_region.this: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.data.aws_iam_policy_document.kms_policy_document: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.data.aws_iam_policy_document.assume_role_policy: Refreshing state...
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.aws_iam_role.this: Refreshing state... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Refreshing state... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405300700000001]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.aws_xray_write_only_access[0]: Refreshing state... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405330300000003]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Refreshing state... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405321900000002]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:26+01:00 logger.go:66: module.this.aws_lambda_function.this: Refreshing state... [id=terratest-aws-lambda-example-M9SAzE]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.aws_xray_write_only_access[0]: Destroying... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405330300000003]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Destroying... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405300700000001]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Destroying... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1-20200611171405321900000002]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_lambda_function.this: Destroying... [id=terratest-aws-lambda-example-M9SAzE]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_lambda_function.this: Destruction complete after 0s
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.aws_xray_write_only_access[0]: Destruction complete after 0s
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.cloudwatch_logs_upload_permission: Destruction complete after 0s
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role_policy_attachment.vpc_attachment[0]: Destruction complete after 0s
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:29+01:00 logger.go:66: module.this.aws_iam_role.this: Destroying... [id=terratest-aws-lambda-example-M9SAzE-eu-west-1]
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:30+01:00 logger.go:66: module.this.aws_iam_role.this: Destruction complete after 1s
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:30+01:00 logger.go:66: 
+TestModuleAttachesXRayPolicy 2020-06-11T18:14:30+01:00 logger.go:66: Destroy complete! Resources: 5 destroyed.
+PASS
+ok  	product-infrastructure/test	75.998s

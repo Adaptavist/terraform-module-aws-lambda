@@ -67,6 +67,15 @@ variable "environment_variables" {
   default     = {}
 }
 
+// Tracing
+
+variable "tracing_mode" {
+  description = "Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode"
+  type        = string
+  default     = null
+}
+
+
 // VPC
 
 variable "vpc_subnet_ids" {

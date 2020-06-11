@@ -45,4 +45,9 @@ output "lambda_role_arn" {
   value       = element(concat(aws_iam_role.this.*.arn, [""]), 0)
 }
 
+output "lambda_role_name" {
+  description = "The ARN of the IAM role created for the lambda function"
+  value       = element(concat(aws_iam_role.this.*.name, [""]), 0)
+}
+
 

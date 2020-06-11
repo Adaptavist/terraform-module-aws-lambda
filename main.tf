@@ -70,6 +70,13 @@ resource "aws_lambda_function" "this" {
     }
   }
 
+  dynamic "tracing_config" {
+    for_each = var.tracing_mode != null ? [true] : []
+    content {
+      mode = var.tracing_mode
+    }
+  }
+
   dynamic "vpc_config" {
     for_each = var.vpc_subnet_ids != null && var.vpc_security_group_ids != null ? [true] : []
     content {
@@ -79,6 +86,14 @@ resource "aws_lambda_function" "this" {
   }
 
   tags = module.labels.tags
+}
+
+// X-Ray
+
+resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
+  count      = var.tracing_mode != null ? 1 : 0
+  role       = aws_iam_role.this.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
 }
 
 // SSM

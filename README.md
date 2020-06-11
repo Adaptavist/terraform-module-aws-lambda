@@ -7,6 +7,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 - (optional) SSM IAM policy to allow the function access to a specified set of SSM parameters
 - (optional) KMS IAM policy to allow the function access to the KMS key used for decryption
 - (optional) VPC attachment IAM policy to allow the function access to VPC resources
+- (optional) Adds X-Ray write only policy if tracing is enabled
 
 ## Variables
 
@@ -22,6 +23,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | timeout                        | integer | 3       |          | timeout                                                                    
 | kms_key_arn                    | string  |         |          | KMS key used for decryption                                                
 | environment_variables          | map     |         |          | Environment variables
+| tracing_mode                   | string  |         |          | Enables X-Ray. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode
 | vpc_subnet_ids                 | list    |         |          | Allows the function to access VPC subnets (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
 | vpc_security_group_ids         | list    |         |          | Allows the function to access VPC (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
 | ssm_parameter_names            | list    |         |          | Names of SSM parameters that lambda will be able to access
@@ -43,3 +45,4 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | lambda_source_code_hash | Base64-encoded representation of raw SHA-256 sum of the zip file  |
 | lambda_source_code_size | The size in bytes of the function .zip file                       |
 | lambda_role_arn         | The ARN of the IAM role created for the lambda function           |
+| lambda_role_name        | The name of the IAM role created for the lambda function           |
