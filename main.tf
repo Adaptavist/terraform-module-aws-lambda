@@ -103,8 +103,10 @@ data "aws_iam_policy_document" "ssm_policy_document" {
 
   statement {
     actions = [
+      "ssm:GetParameter",
       "ssm:GetParameters",
       "ssm:GetParametersByPath",
+      "ssm:GetParameterHistory"
     ]
 
     resources = [
