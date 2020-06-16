@@ -2,7 +2,7 @@
 
 variable "name" {
   type    = string
-  default = "vpc"
+  default = "function"
 }
 
 variable "namespace" {
