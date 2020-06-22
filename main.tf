@@ -1,3 +1,6 @@
+terraform {
+  experiments = [variable_validation]
+}
 
 module "labels" {
   source    = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.4.0"
@@ -7,11 +10,9 @@ module "labels" {
   tags      = var.tags
 }
 
-data "aws_region" "this" {
-}
+data "aws_region" "this" {}
 
-data "aws_caller_identity" "this" {
-}
+data "aws_caller_identity" "this" {}
 
 // package
 
@@ -44,7 +45,6 @@ resource "aws_iam_role" "this" {
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs_upload_permission" {
   role       = aws_iam_role.this.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-
 }
 
 resource "aws_lambda_function" "this" {
@@ -71,7 +71,7 @@ resource "aws_lambda_function" "this" {
   }
 
   dynamic "tracing_config" {
-    for_each = var.tracing_mode != null ? [true] : []
+    for_each = var.enable_tracing ? [true] : []
     content {
       mode = var.tracing_mode
     }
