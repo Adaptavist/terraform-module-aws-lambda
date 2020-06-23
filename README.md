@@ -14,7 +14,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | Name                           | Type    | Default | Required | Description                                                                
 | ------------------------------ | ------- | ------- | -------- | -------------------------------------------------------------------------- 
 | function_name                  | string  |         | ✓        | A unique name for the lambda function                                      
-| description                    | string  |         |          | A description of the lambda function                                       
+| description                    | string  |         | ✓        | A description of the lambda function                                       
 | lambda_code_dir                | string  |         | ✓        | A directory containing the code that needs to be packaged                  
 | handler                        | string  |         | ✓        | The function entrypoint                                                    
 | runtime                        | string  |         | ✓        | The runtime environment for the Lambda function                            
@@ -23,7 +23,8 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | timeout                        | integer | 3       |          | timeout                                                                    
 | kms_key_arn                    | string  |         |          | KMS key used for decryption                                                
 | environment_variables          | map     |         |          | Environment variables
-| tracing_mode                   | string  |         |          | Enables X-Ray. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode
+| enable_tracing                 | bool    | false   |          | Enables X-Ray. If true, tracing_mode variable is required
+| tracing_mode                   | string  |         |          | Mandatory if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode
 | vpc_subnet_ids                 | list    |         |          | Allows the function to access VPC subnets (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
 | vpc_security_group_ids         | list    |         |          | Allows the function to access VPC (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
 | ssm_parameter_names            | list    |         |          | Names of SSM parameters that lambda will be able to access
@@ -45,4 +46,4 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | lambda_source_code_hash | Base64-encoded representation of raw SHA-256 sum of the zip file  |
 | lambda_source_code_size | The size in bytes of the function .zip file                       |
 | lambda_role_arn         | The ARN of the IAM role created for the lambda function           |
-| lambda_role_name        | The name of the IAM role created for the lambda function           |
+| lambda_role_name        | The name of the IAM role created for the lambda function          |
