@@ -55,7 +55,6 @@ variable "reserved_concurrent_executions" {
 }
 variable "timeout" {
   description = "timeout"
-  default     = 3
 }
 variable "kms_key_arn" {
   description = "KMS key used for decryption"

@@ -20,7 +20,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | runtime                        | string  |         | ✓        | The runtime environment for the Lambda function                            
 | memory_size                    | integer | 128     |          | Amount of memory in MB your Lambda Function can use at runtime             
 | reserved_concurrent_executions | string  | -1      |          | The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations.
-| timeout                        | integer | 3       |          | timeout                                                                    
+| timeout                        | integer |         | ✓        | timeout                                                                    
 | kms_key_arn                    | string  |         |          | KMS key used for decryption                                                
 | environment_variables          | map     |         |          | Environment variables
 | enable_tracing                 | bool    | false   |          | Enables X-Ray. If true, tracing_mode variable is required
