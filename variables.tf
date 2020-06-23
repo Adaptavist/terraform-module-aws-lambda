@@ -75,6 +75,25 @@ variable "tracing_mode" {
   default     = null
 }
 
+// Cloudwatch
+
+variable "disable_cloudwatch_logs" {
+  description = "Disable cloudwatch logs"
+  type        = bool
+  default     = false
+}
+
+variable "cloudwatch_retention_in_days" {
+  description = "The number of days you want to retain log events in lambda's log group"
+  type        = number
+  default     = 14
+}
+
+variable "cloudwatch_kms_key_arn" {
+  description = "The ARN of the KMS Key to use when encrypting log data"
+  type        = string
+  default     = null
+}
 
 // VPC
 
@@ -97,3 +116,5 @@ variable "ssm_parameter_names" {
   type        = list(string)
   default     = []
 }
+
+

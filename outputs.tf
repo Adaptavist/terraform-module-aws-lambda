@@ -45,9 +45,7 @@ output "lambda_role_arn" {
   value       = aws_iam_role.this.*.arn
 }
 
-output "lambda_role_name" {
-  description = "The ARN of the IAM role created for the lambda function"
-  value       = aws_iam_role.this.*.name
+output "cloudwatch_log_group_arn" {
+  description = "The ARN of the cloudwatch log group"
+  value = aws_cloudwatch_log_group.this.arn
 }
-
-
