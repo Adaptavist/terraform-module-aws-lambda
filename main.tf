@@ -1,3 +1,6 @@
+terraform {
+  experiments = [variable_validation]
+}
 
 module "labels" {
   source    = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.4.0"
@@ -7,11 +10,9 @@ module "labels" {
   tags      = var.tags
 }
 
-data "aws_region" "this" {
-}
+data "aws_region" "this" {}
 
-data "aws_caller_identity" "this" {
-}
+data "aws_caller_identity" "this" {}
 
 // package
 
@@ -65,7 +66,7 @@ resource "aws_lambda_function" "this" {
   }
 
   dynamic "tracing_config" {
-    for_each = var.tracing_mode != null ? [true] : []
+    for_each = var.enable_tracing ? [true] : []
     content {
       mode = var.tracing_mode
     }

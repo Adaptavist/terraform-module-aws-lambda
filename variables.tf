@@ -69,10 +69,21 @@ variable "environment_variables" {
 
 // Tracing
 
+variable "enable_tracing" {
+  description = "Enable tracing of requests. If tracing is enabled, tracing mode needs to be specified."
+  type        = bool
+  default     = false
+}
+
+
 variable "tracing_mode" {
-  description = "Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode"
+  description = "Required if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode"
   type        = string
   default     = null
+  validation {
+    condition     = var.tracing_mode != null ? (var.tracing_mode == "PassThrough" || var.tracing_mode == "Active") : true
+    error_message = "Tracing mode is mandatory if tracing is enabled. Possible values are PassThrough or Active."
+  }
 }
 
 // Cloudwatch
