@@ -20,11 +20,14 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | runtime                        | string  |         | ✓        | The runtime environment for the Lambda function                            
 | memory_size                    | integer | 128     |          | Amount of memory in MB your Lambda Function can use at runtime             
 | reserved_concurrent_executions | string  | -1      |          | The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations.
-| timeout                        | integer | 3       |          | timeout                                                                    
+| timeout                        | integer |         | ✓        | timeout                                                                    
 | kms_key_arn                    | string  |         |          | KMS key used for decryption                                                
 | environment_variables          | map     |         |          | Environment variables
 | enable_tracing                 | bool    | false   |          | Enables X-Ray. If true, tracing_mode variable is required
 | tracing_mode                   | string  |         |          | Mandatory if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode
+| enable_cloudwatch_logs         | bool    | true    |          | Enable cloudwatch logs
+| cloudwatch_retention_in_days   | integer | 14      |          | The number of days you want to retain log events in lambda's log group
+| cloudwatch_kms_key_arn         | string  |         |          | The ARN of the KMS Key to use when encrypting log data
 | vpc_subnet_ids                 | list    |         |          | Allows the function to access VPC subnets (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
 | vpc_security_group_ids         | list    |         |          | Allows the function to access VPC (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
 | ssm_parameter_names            | list    |         |          | Names of SSM parameters that lambda will be able to access
@@ -47,3 +50,4 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | lambda_source_code_size | The size in bytes of the function .zip file                       |
 | lambda_role_arn         | The ARN of the IAM role created for the lambda function           |
 | lambda_role_name        | The name of the IAM role created for the lambda function          |
+| cloudwatch_log_group_arn| The ARN of the cloudwatch log group                               |

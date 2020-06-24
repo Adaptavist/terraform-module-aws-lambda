@@ -55,7 +55,6 @@ variable "reserved_concurrent_executions" {
 }
 variable "timeout" {
   description = "timeout"
-  default     = 3
 }
 variable "kms_key_arn" {
   description = "KMS key used for decryption"
@@ -86,6 +85,25 @@ variable "tracing_mode" {
   }
 }
 
+// Cloudwatch
+
+variable "enable_cloudwatch_logs" {
+  description = "Enable cloudwatch logs"
+  type        = bool
+  default     = true
+}
+
+variable "cloudwatch_retention_in_days" {
+  description = "The number of days you want to retain log events in lambda's log group"
+  type        = number
+  default     = 14
+}
+
+variable "cloudwatch_kms_key_arn" {
+  description = "The ARN of the KMS Key to use when encrypting log data"
+  type        = string
+  default     = null
+}
 
 // VPC
 
@@ -108,3 +126,5 @@ variable "ssm_parameter_names" {
   type        = list(string)
   default     = []
 }
+
+
