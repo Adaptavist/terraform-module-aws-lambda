@@ -87,10 +87,10 @@ variable "tracing_mode" {
 
 // Cloudwatch
 
-variable "disable_cloudwatch_logs" {
-  description = "Disable cloudwatch logs"
+variable "enable_cloudwatch_logs" {
+  description = "Enable cloudwatch logs"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "cloudwatch_retention_in_days" {

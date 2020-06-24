@@ -25,7 +25,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | environment_variables          | map     |         |          | Environment variables
 | enable_tracing                 | bool    | false   |          | Enables X-Ray. If true, tracing_mode variable is required
 | tracing_mode                   | string  |         |          | Mandatory if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode
-| disable_cloudwatch_logs        | bool    | false   |          | Disable cloudwatch logs
+| enable_cloudwatch_logs         | bool    | true    |          | Enable cloudwatch logs
 | cloudwatch_retention_in_days   | integer | 14      |          | The number of days you want to retain log events in lambda's log group
 | cloudwatch_kms_key_arn         | string  |         |          | The ARN of the KMS Key to use when encrypting log data
 | vpc_subnet_ids                 | list    |         |          | Allows the function to access VPC subnets (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
