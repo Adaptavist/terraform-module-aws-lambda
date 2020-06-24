@@ -20,5 +20,6 @@ module "this" {
   lambda_code_dir = "../src"
   handler         = "main.handler"
   runtime         = "nodejs10.x"
+  timeout         = 3
 }
 

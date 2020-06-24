@@ -79,10 +79,10 @@ variable "tracing_mode" {
   description = "Required if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode"
   type        = string
   default     = null
-  validation {
+  /*validation {
     condition     = var.tracing_mode != null ? (var.tracing_mode == "PassThrough" || var.tracing_mode == "Active") : true
     error_message = "Tracing mode is mandatory if tracing is enabled. Possible values are PassThrough or Active."
-  }
+  }*/
 }
 
 // Cloudwatch

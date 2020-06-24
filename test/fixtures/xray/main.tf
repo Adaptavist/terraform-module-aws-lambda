@@ -12,14 +12,16 @@ provider "aws" {
 }
 
 module "this" {
-  source          = "../../.."
-  namespace       = "adaptavist-terraform"
-  stage           = "integration"
-  function_name   = var.function_name
-  description     = "test hello world lambda"
-  lambda_code_dir = "../src"
-  handler         = "main.handler"
-  runtime         = "nodejs10.x"
-  tracing_mode    = "Active"
+  source                 = "../../.."
+  namespace              = "adaptavist-terraform"
+  stage                  = "integration"
+  function_name          = var.function_name
+  description            = "test hello world lambda"
+  lambda_code_dir        = "../src"
+  handler                = "main.handler"
+  runtime                = "nodejs10.x"
+  tracing_mode           = "Active"
+  timeout                = 3
+  enable_cloudwatch_logs = false
 }
 

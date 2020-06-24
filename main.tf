@@ -1,6 +1,6 @@
-terraform {
+/*terraform {
   experiments = [variable_validation]
-}
+}*/
 
 module "labels" {
   source    = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.4.0"
@@ -92,7 +92,7 @@ resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
-  count = var.enable_cloudwatch_logs ? 1 : 0
+  count             = var.enable_cloudwatch_logs ? 1 : 0
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.cloudwatch_retention_in_days
   kms_key_id        = var.cloudwatch_kms_key_arn

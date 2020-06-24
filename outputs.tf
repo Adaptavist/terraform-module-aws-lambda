@@ -47,7 +47,7 @@ output "lambda_role_arn" {
 
 output "cloudwatch_log_group_arn" {
   description = "The ARN of the cloudwatch log group"
-  value       = aws_cloudwatch_log_group.this.arn
+  value       = join("", aws_cloudwatch_log_group.this.*.arn)
 }
 
 
