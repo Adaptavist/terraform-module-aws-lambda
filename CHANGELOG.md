@@ -1,3 +1,10 @@
+## [1.0.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.0.0...v1.0.1) (2020-07-02)
+
+
+### Bug Fixes
+
+* releasing zip ([f9ebb10](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/f9ebb109c9572580e18121eccefb5b3d443e8d44))
+
 # 1.0.0 (2020-07-02)
 
 
