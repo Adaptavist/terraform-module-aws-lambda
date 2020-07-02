@@ -28,7 +28,13 @@
       "@semantic-release/changelog",
       "@semantic-release/commit-analyzer",
       "@semantic-release/git",
-      "@semantic-release/release-notes-generator"
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/exec",
+        {
+          "successCmd": "aws s3 sync . s3://terraform.adaptavistlabs.com-website/modules/${process.env.BITBUCKET_REPO_SLUG}/${nextRelease.version}/ --delete --exclude=\"node_modules/**\" --exclude \".git/**\" --include \"*.tf\" --include \"*.md\" --include \"*.html\""
+        }
+      ]
     ]
   },
   "commitlint": {
