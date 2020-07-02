@@ -8,12 +8,16 @@ definitions:
 
   release: &release
     name: Release
-    image: node:13
+    image: adaptavist/all-tools:latest
     caches:
       - node
     script:
       - npm install --save-dev
-      - npx semantic-release -r ${BITBUCKET_GIT_HTTP_ORIGIN}
+      - AWS_ACCESS_KEY_ID=$DEPLOY_AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY=$DEPLOY_AWS_SECRET_ACCESS_KEY
+        AWS_DEFAULT_REGION=us-east-1
+        npx semantic-release -r ${BITBUCKET_GIT_HTTP_ORIGIN}
+        # semantic release will perform S3 sync if successful
 
 pipelines:
   default:
