@@ -1,3 +1,10 @@
+## [1.0.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.0.1...v1.0.2) (2020-07-02)
+
+
+### Bug Fixes
+
+* allowing public read ([a17cae4](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/a17cae4fb88f363483673eba550f57192ce62cb8))
+
 ## [1.0.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.0.0...v1.0.1) (2020-07-02)
 
 
