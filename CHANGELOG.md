@@ -1,3 +1,10 @@
+# [1.1.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.0.2...v1.1.0) (2020-07-13)
+
+
+### Features
+
+* initial to terraform registry ([2ad088d](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/2ad088d482af95dd46ecafd25ce9b882beca1ffd))
+
 ## [1.0.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.0.1...v1.0.2) (2020-07-02)
 
 
