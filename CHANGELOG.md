@@ -1,3 +1,10 @@
+## [1.1.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.0...v1.1.1) (2020-07-14)
+
+
+### Bug Fixes
+
+* forcing the new version ([5c69cc9](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/5c69cc9ed6cf5c9cdfb5e615837478f1a8d34554))
+
 # [1.1.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.0.2...v1.1.0) (2020-07-13)
 
 
