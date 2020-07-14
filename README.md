@@ -51,3 +51,5 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | lambda_role_arn         | The ARN of the IAM role created for the lambda function           |
 | lambda_role_name        | The name of the IAM role created for the lambda function          |
 | cloudwatch_log_group_arn| The ARN of the cloudwatch log group                               |
+
+
