@@ -1,3 +1,10 @@
+## [1.1.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.1...v1.1.2) (2020-07-14)
+
+
+### Bug Fixes
+
+* using terraform registry labels reference ([e038038](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e038038832b8609a8f4b809bd49a9542cf476af2))
+
 ## [1.1.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.0...v1.1.1) (2020-07-14)
 
 
