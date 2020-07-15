@@ -1,3 +1,10 @@
+## [1.1.3](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.2...v1.1.3) (2020-07-15)
+
+
+### Bug Fixes
+
+* adding iam role name as output ([ae7510b](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/ae7510b87ef944b9ba39f0159727498eb8aa24eb))
+
 ## [1.1.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.1...v1.1.2) (2020-07-14)
 
 
