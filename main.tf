@@ -38,14 +38,14 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = "${var.function_name}-${data.aws_region.this.name}"
+  name               = "${module.labels.id}-${var.function_name}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
   tags = module.labels.tags
 }
 
 resource "aws_lambda_function" "this" {
-  function_name = var.function_name
+  function_name = "${module.labels.id}-${var.function_name}"
   description   = var.description
 
   memory_size = var.memory_size

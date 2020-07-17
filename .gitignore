@@ -4,3 +4,5 @@
 .idea
 node_modules
 *.zip
+/test/**/*.out
+/test/**/*.out.json
