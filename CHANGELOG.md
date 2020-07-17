@@ -1,3 +1,10 @@
+# [1.2.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.3...v1.2.0) (2020-07-17)
+
+
+### Features
+
+* forcing release ([4b48ef6](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/4b48ef66d0ae5c6db6b8fd8b771a144bf905f1f6))
+
 ## [1.1.3](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.2...v1.1.3) (2020-07-15)
 
 
