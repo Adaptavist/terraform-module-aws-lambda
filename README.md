@@ -17,7 +17,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | description                    | string  |         | ✓        | A description of the lambda function                                       
 | lambda_code_dir                | string  |         | ✓        | A directory containing the code that needs to be packaged                  
 | handler                        | string  |         | ✓        | The function entrypoint                                                    
-| runtime                        | string  |         | ✓        | The runtime environment for the Lambda function                            
+| runtime                        | string  |         | ✓        | The runtime environment for the Lambda function. Valid Values: nodejs10.x nodejs12.x java8 java11 python2.7 python3.6 python3.7 python3.8 dotnetcore2.1 dotnetcore3.1 go1.x ruby2.5 ruby2.7 provided                            
 | memory_size                    | integer | 128     |          | Amount of memory in MB your Lambda Function can use at runtime             
 | reserved_concurrent_executions | string  | -1      |          | The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations.
 | timeout                        | integer |         | ✓        | timeout                                                                    

@@ -12,9 +12,15 @@ provider "aws" {
 }
 
 module "this" {
-  source                 = "../../.."
-  namespace              = "adaptavist-terraform"
-  stage                  = "integration"
+  source    = "../../.."
+  namespace = "adaptavist-terraform"
+  stage     = "stg"
+  name      = "test"
+  tags = {
+    Product      = "test"
+    BusinessUnit = "test"
+    Component    = "test"
+  }
   function_name          = "test-function"
   description            = "test hello world lambda"
   lambda_code_dir        = "../src"

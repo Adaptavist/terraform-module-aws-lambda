@@ -14,8 +14,7 @@ variable "stage" {
 }
 
 variable "tags" {
-  type    = map(string)
-  default = {}
+  type = map(string)
 }
 
 // lambda
@@ -36,8 +35,9 @@ variable "handler" {
   type        = string
 }
 
+// TODO do variable validation once we move to TF 0.13
 variable "runtime" {
-  description = "The runtime environment for the Lambda function."
+  description = "The runtime environment for the Lambda function. Valid Values: nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided"
   type        = string
 }
 

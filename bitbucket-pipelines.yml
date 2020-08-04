@@ -11,14 +11,16 @@ definitions:
         AWS_ACCESS_KEY_ID="${TF_TEST_AWS_ACCESS_KEY_ID}"
         AWS_SECRET_ACCESS_KEY="${TF_TEST_AWS_SECRET_ACCESS_KEY}"
         terraform plan -out=plan.out &&
-        terraform-compliance -f . -p plan.out)
+        terraform-compliance -f . -p plan.out &&
+        terraform-compliance -f git:https://github.com/Adaptavist/terraform-compliance.git -p plan.out)
       - (cd test/fixtures/xray &&
         terraform init &&
         AWS_DEFAULT_REGION=us-east-1
         AWS_ACCESS_KEY_ID="${TF_TEST_AWS_ACCESS_KEY_ID}"
         AWS_SECRET_ACCESS_KEY="${TF_TEST_AWS_SECRET_ACCESS_KEY}"
         terraform plan -out=plan.out &&
-        terraform-compliance -f . -p plan.out)
+        terraform-compliance -f . -p plan.out &&
+        terraform-compliance -f git:https://github.com/Adaptavist/terraform-compliance.git -p plan.out)
 
   release: &release
     name: Release
