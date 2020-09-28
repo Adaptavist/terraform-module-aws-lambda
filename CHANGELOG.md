@@ -1,3 +1,10 @@
+# [1.3.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.2.0...v1.3.0) (2020-09-28)
+
+
+### Features
+
+* adding name output and test tags ([e5cc584](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e5cc584e889d66676b19e0c2725d11c751e89a28))
+
 # [1.2.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.1.3...v1.2.0) (2020-07-17)
 
 
