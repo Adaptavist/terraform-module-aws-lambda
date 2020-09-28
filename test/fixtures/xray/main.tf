@@ -17,9 +17,12 @@ module "this" {
   stage     = "stg"
   name      = "test"
   tags = {
-    Product      = "test"
-    BusinessUnit = "test"
-    Component    = "test"
+    "Avst:Project"      = "testproject"
+    "Avst:BusinessUnit" = "testbu"
+    "Avst:CostCenter"   = "testCC"
+    "Avst:Team"         = "testteam"
+    "Avst:Stage:Name"   = "teststage"
+    "Avst:Stage:Type"   = "integration"
   }
   function_name          = "test-function"
   description            = "test hello world lambda"
