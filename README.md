@@ -40,6 +40,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 
 | Name                    | Description                                                       |
 | ----------------------- | ----------------------------------------------------------------- |
+| lambda_name             | The name of the Lambda Function                                   |
 | lambda_arn              | The ARN of the Lambda Function                                    |
 | lambda_invoke_arn       | The Invoke ARN of the Lambda Function                             |
 | lambda_qualified_arn    | The ARN identifying lambda function version                       |

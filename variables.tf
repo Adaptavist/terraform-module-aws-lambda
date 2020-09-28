@@ -126,5 +126,3 @@ variable "ssm_parameter_names" {
   type        = list(string)
   default     = []
 }
-
-
