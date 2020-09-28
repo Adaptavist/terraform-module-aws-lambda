@@ -33,4 +33,3 @@ module "this" {
   timeout                = 3
   enable_cloudwatch_logs = false
 }
-

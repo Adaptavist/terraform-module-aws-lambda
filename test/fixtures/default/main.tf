@@ -31,4 +31,3 @@ module "this" {
   runtime         = "nodejs10.x"
   timeout         = 3
 }
-
