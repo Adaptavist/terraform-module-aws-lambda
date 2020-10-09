@@ -1,3 +1,10 @@
+# [1.4.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.3.0...v1.4.0) (2020-10-09)
+
+
+### Features
+
+* terraform 13 support ([8bcf945](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/8bcf945fe25796e5b2a8b41495b9fa2df49d8954))
+
 # [1.3.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.2.0...v1.3.0) (2020-09-28)
 
 
