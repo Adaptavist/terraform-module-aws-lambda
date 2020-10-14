@@ -1,3 +1,10 @@
+# [1.5.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.4.0...v1.5.0) (2020-10-14)
+
+
+### Features
+
+* unique lambda zip names ([572f796](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/572f7966503d6170e2f0dc5a3578e0d537c63239))
+
 # [1.4.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.3.0...v1.4.0) (2020-10-09)
 
 
