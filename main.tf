@@ -20,7 +20,7 @@ data "aws_caller_identity" "this" {}
 
 data "archive_file" "this" {
   type        = "zip"
-  output_path = "${var.function_name}.zip"
+  output_path = "${module.labels.id}-${var.function_name}.zip"
   source_dir  = var.lambda_code_dir
 }
 
