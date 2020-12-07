@@ -1,3 +1,10 @@
+# [1.6.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.5.0...v1.6.0) (2020-12-07)
+
+
+### Features
+
+* adding edge lambda support ([eb355d6](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/eb355d6b0a1a6bf026e76da77571855f3bfce141))
+
 # [1.5.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.4.0...v1.5.0) (2020-10-14)
 
 
