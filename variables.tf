@@ -35,6 +35,12 @@ variable "handler" {
   type        = string
 }
 
+variable "publish_lambda" {
+  description = "Whether to publish creation/change as new Lambda Function Version."
+  type        = bool
+  default     = false
+}
+
 // TODO do variable validation once we move to TF 0.13
 variable "runtime" {
   description = "The runtime environment for the Lambda function. Valid Values: nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided"

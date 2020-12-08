@@ -59,6 +59,7 @@ resource "aws_lambda_function" "this" {
   reserved_concurrent_executions = var.reserved_concurrent_executions
   timeout                        = var.timeout
   kms_key_arn                    = var.kms_key_arn
+  publish                        = var.publish_lambda
 
   filename         = data.archive_file.this.output_path
   source_code_hash = data.archive_file.this.output_base64sha256
