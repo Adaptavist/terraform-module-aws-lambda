@@ -1,3 +1,10 @@
+# [1.7.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.6.0...v1.7.0) (2020-12-08)
+
+
+### Features
+
+* Adding ability to publish lambdas ([78cdfa6](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/78cdfa6d76f962f5ff83012a64507931a42c3aea))
+
 # [1.6.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.5.0...v1.6.0) (2020-12-07)
 
 
