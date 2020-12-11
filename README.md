@@ -15,6 +15,7 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 | ------------------------------ | ------- | ------- | -------- | -------------------------------------------------------------------------- 
 | function_name                  | string  |         | ✓        | A unique name for the lambda function                                      
 | description                    | string  |         | ✓        | A description of the lambda function                                       
+| disable_label_function_name_prefix| bool | false   |          | Indicates if prefixing of the lambda function name should be disabled. Defaults to false
 | lambda_code_dir                | string  |         | ✓        | A directory containing the code that needs to be packaged                  
 | handler                        | string  |         | ✓        | The function entrypoint                                                    
 | runtime                        | string  |         | ✓        | The runtime environment for the Lambda function. Valid Values: nodejs10.x nodejs12.x java8 java11 python2.7 python3.6 python3.7 python3.8 dotnetcore2.1 dotnetcore3.1 go1.x ruby2.5 ruby2.7 provided                            
