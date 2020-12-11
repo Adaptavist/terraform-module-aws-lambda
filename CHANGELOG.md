@@ -1,3 +1,10 @@
+## [1.7.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.7.0...v1.7.1) (2020-12-11)
+
+
+### Bug Fixes
+
+* added disable_label_function_name_prefix var ([1b696c2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/1b696c280f77cbc2796add9270632e32d14e2b93))
+
 # [1.7.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.6.0...v1.7.0) (2020-12-08)
 
 
