@@ -24,6 +24,12 @@ variable "function_name" {
   type        = string
 }
 
+variable "disable_label_function_name_prefix" {
+  description = "Indicates if prefixing of the lambda function name should be disabled. Defaults to false"
+  type        = bool
+  default     = false
+}
+
 variable "lambda_code_dir" {
   description = "A directory containing the code that needs to be packaged."
   type        = string

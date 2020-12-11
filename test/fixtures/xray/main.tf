@@ -1,14 +1,11 @@
 terraform {
-  required_version = "~> 0.12.0"
-
   backend "local" {
     path = "terraform.tfstate"
   }
 }
 
 provider "aws" {
-  version = "v2.30.0"
-  region  = "eu-west-1"
+  region = "eu-west-1"
 }
 
 module "this" {

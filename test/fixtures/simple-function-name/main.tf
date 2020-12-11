@@ -9,10 +9,11 @@ provider "aws" {
 }
 
 module "this" {
-  source    = "../../.."
-  namespace = "adaptavist-terraform"
-  stage     = "stg"
-  name      = "test"
+  source                             = "../../.."
+  namespace                          = "adaptavist-terraform"
+  stage                              = "stg"
+  name                               = "test"
+  disable_label_function_name_prefix = true
   tags = {
     "Avst:Project"      = "testproject"
     "Avst:BusinessUnit" = "testbu"

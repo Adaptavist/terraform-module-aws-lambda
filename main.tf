@@ -16,6 +16,10 @@ data "aws_region" "this" {}
 
 data "aws_caller_identity" "this" {}
 
+locals {
+  function_name = var.disable_label_function_name_prefix ? var.function_name : "${module.labels.id}-${var.function_name}"
+}
+
 // package
 
 data "archive_file" "this" {
@@ -41,14 +45,14 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = "${module.labels.id}-${var.function_name}"
+  name               = local.function_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
   tags = module.labels.tags
 }
 
 resource "aws_lambda_function" "this" {
-  function_name = "${module.labels.id}-${var.function_name}"
+  function_name = local.function_name
   description   = var.description
 
   memory_size = var.memory_size
