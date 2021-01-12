@@ -1,3 +1,10 @@
+# [1.8.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.7.1...v1.8.0) (2021-01-12)
+
+
+### Features
+
+* **labeling:** adding flag which can enable region names on IAM role name ([1d158a7](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/1d158a7727ba060d183dd55fd29c513ec3270f13))
+
 ## [1.7.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.7.0...v1.7.1) (2020-12-11)
 
 
