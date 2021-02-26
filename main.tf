@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = local.function_name
+  name               = var.include_region ? "${local.function_name}-${data.aws_region.this.name}" : local.function_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
   tags = module.labels.tags
