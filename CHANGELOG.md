@@ -1,3 +1,10 @@
+## [1.8.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.0...v1.8.1) (2021-02-26)
+
+
+### Bug Fixes
+
+* using path module for target zip ([72dd813](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/72dd813497323ef55a1ee408bb97ff224b17b8fa))
+
 # [1.8.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.7.1...v1.8.0) (2021-01-12)
 
 
