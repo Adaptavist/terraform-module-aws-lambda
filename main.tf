@@ -24,7 +24,7 @@ locals {
 
 data "archive_file" "this" {
   type        = "zip"
-  output_path = "${module.labels.id}-${var.function_name}.zip"
+  output_path = "${path.module}/${module.labels.id}-${var.function_name}.zip"
   source_dir  = var.lambda_code_dir
 }
 
