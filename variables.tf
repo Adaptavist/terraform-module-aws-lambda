@@ -84,6 +84,15 @@ variable "environment_variables" {
   default     = {}
 }
 
+variable "assume_role_policy_principles" {
+  description = "Principles which can assume the lambdas role."
+  type        = list(string)
+  default = [
+    "lambda.amazonaws.com",
+    "edgelambda.amazonaws.com"
+  ]
+}
+
 // Tracing
 
 variable "enable_tracing" {
