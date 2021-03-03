@@ -1,3 +1,10 @@
+# [1.9.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.1...v1.9.0) (2021-03-03)
+
+
+### Features
+
+* added assume_role_policy_principles variable ([433699c](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/433699c11402d6889fa09629c4732fedd4223c81))
+
 ## [1.8.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.0...v1.8.1) (2021-02-26)
 
 
