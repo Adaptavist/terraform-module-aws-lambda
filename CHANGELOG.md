@@ -1,3 +1,10 @@
+# [1.10.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.9.0...v1.10.0) (2021-04-19)
+
+
+### Features
+
+* added region as mandatory variable ([af27e20](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/af27e20fa8aa1b65bade23fb94ad8a713672ec6e))
+
 # [1.9.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.1...v1.9.0) (2021-03-03)
 
 
