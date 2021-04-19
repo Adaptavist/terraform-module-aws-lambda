@@ -17,6 +17,11 @@ variable "tags" {
   type = map(string)
 }
 
+variable "aws_region" {
+  type        = string
+  description = "AWS Region"
+}
+
 variable "include_region" {
   type        = bool
   default     = false

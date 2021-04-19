@@ -12,12 +12,11 @@ module "labels" {
   tags      = var.tags
 }
 
-data "aws_region" "this" {}
-
 data "aws_caller_identity" "this" {}
 
 locals {
   function_name = var.disable_label_function_name_prefix ? var.function_name : "${module.labels.id}-${var.function_name}"
+  role_name     = var.include_region ? "${local.function_name}-${var.aws_region}" : local.function_name
 }
 
 // package
@@ -42,7 +41,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = var.include_region ? "${local.function_name}-${data.aws_region.this.name}" : local.function_name
+  name               = local.role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
   tags = module.labels.tags
@@ -94,7 +93,7 @@ resource "aws_lambda_function" "this" {
 
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
-  role       = aws_iam_role.this.name
+  role       = local.role_name
   policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
 }
 
@@ -107,7 +106,7 @@ resource "aws_cloudwatch_log_group" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs_upload_permission" {
-  role       = aws_iam_role.this.name
+  role       = local.role_name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
@@ -125,7 +124,7 @@ data "aws_iam_policy_document" "ssm_policy_document" {
     ]
 
     resources = [
-      "arn:aws:ssm:${data.aws_region.this.name}:${data.aws_caller_identity.this.account_id}:parameter/${element(var.ssm_parameter_names, count.index)}",
+      "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.this.account_id}:parameter/${element(var.ssm_parameter_names, count.index)}",
     ]
   }
 
@@ -133,7 +132,7 @@ data "aws_iam_policy_document" "ssm_policy_document" {
 
 resource "aws_iam_policy" "ssm_policy" {
   count       = length(var.ssm_parameter_names)
-  name        = "${aws_lambda_function.this.function_name}-ssm-${count.index}-${data.aws_region.this.name}"
+  name        = "${aws_lambda_function.this.function_name}-ssm-${count.index}-${var.aws_region}"
   description = "Provides minimum Parameter Store permissions for ${aws_lambda_function.this.function_name}."
   policy      = data.aws_iam_policy_document.ssm_policy_document[count.index].json
 }
@@ -141,7 +140,7 @@ resource "aws_iam_policy" "ssm_policy" {
 
 resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
   count      = length(var.ssm_parameter_names)
-  role       = aws_iam_role.this.name
+  role       = local.role_name
   policy_arn = aws_iam_policy.ssm_policy[count.index].arn
 }
 
@@ -161,14 +160,14 @@ data "aws_iam_policy_document" "kms_policy_document" {
 
 resource "aws_iam_policy" "kms_policy" {
   count       = var.kms_key_arn != "" ? 1 : 0
-  name        = "${aws_lambda_function.this.function_name}-kms-${data.aws_region.this.name}"
+  name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
   description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
   policy      = data.aws_iam_policy_document.kms_policy_document.json
 }
 
 resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
   count      = var.kms_key_arn != "" ? 1 : 0
-  role       = aws_iam_role.this.name
+  role       = local.role_name
   policy_arn = aws_iam_policy.kms_policy[count.index].arn
 }
 
@@ -178,6 +177,6 @@ resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
 
 resource "aws_iam_role_policy_attachment" "vpc_attachment" {
   count      = var.vpc_subnet_ids != null && var.vpc_security_group_ids != null ? 1 : 0
-  role       = aws_iam_role.this.name
+  role       = local.role_name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }

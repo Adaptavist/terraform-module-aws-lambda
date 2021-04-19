@@ -13,6 +13,7 @@ module "this" {
   namespace                          = "adaptavist-terraform"
   stage                              = "stg"
   name                               = "test"
+  aws_region                         = "us-west-2"
   disable_label_function_name_prefix = true
   tags = {
     "Avst:Project"      = "testproject"

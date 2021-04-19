@@ -9,10 +9,12 @@ provider "aws" {
 }
 
 module "this" {
-  source    = "../../.."
-  namespace = "adaptavist-terraform"
-  stage     = "stg"
-  name      = "test"
+  source     = "../../.."
+  namespace  = "adaptavist-terraform"
+  stage      = "stg"
+  name       = "test"
+  aws_region = "us-west-2"
+
   tags = {
     "Avst:Project"      = "testproject"
     "Avst:BusinessUnit" = "testbu"
