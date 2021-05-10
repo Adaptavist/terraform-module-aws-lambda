@@ -95,6 +95,8 @@ resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
   role       = local.role_name
   policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+
+  depends_on = [aws_iam_role.this]
 }
 
 resource "aws_cloudwatch_log_group" "this" {
@@ -108,6 +110,8 @@ resource "aws_cloudwatch_log_group" "this" {
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs_upload_permission" {
   role       = local.role_name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+
+  depends_on = [aws_iam_role.this]
 }
 
 // SSM
@@ -142,6 +146,8 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
   count      = length(var.ssm_parameter_names)
   role       = local.role_name
   policy_arn = aws_iam_policy.ssm_policy[count.index].arn
+
+  depends_on = [aws_iam_role.this]
 }
 
 // KMS
@@ -169,6 +175,8 @@ resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
   count      = var.kms_key_arn != "" ? 1 : 0
   role       = local.role_name
   policy_arn = aws_iam_policy.kms_policy[count.index].arn
+
+  depends_on = [aws_iam_role.this]
 }
 
 // S3 policies are not part of this module. Module outputs lambda role name to enable attachment of additional policies, including S3
@@ -179,4 +187,6 @@ resource "aws_iam_role_policy_attachment" "vpc_attachment" {
   count      = var.vpc_subnet_ids != null && var.vpc_security_group_ids != null ? 1 : 0
   role       = local.role_name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+
+  depends_on = [aws_iam_role.this]
 }
