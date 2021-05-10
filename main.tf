@@ -169,8 +169,6 @@ resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
   count      = var.kms_key_arn != "" ? 1 : 0
   role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.kms_policy[count.index].arn
-
-  depends_on = [aws_iam_role.this]
 }
 
 // S3 policies are not part of this module. Module outputs lambda role name to enable attachment of additional policies, including S3
