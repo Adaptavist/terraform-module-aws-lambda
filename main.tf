@@ -97,7 +97,7 @@ resource "aws_lambda_function" "this" {
 
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
-  role       = local.role_name
+  role       = aws_iam_role.this.name
   policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
 }
 
@@ -110,7 +110,7 @@ resource "aws_cloudwatch_log_group" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs_upload_permission" {
-  role       = local.role_name
+  role       = aws_iam_role.this.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
@@ -144,7 +144,7 @@ resource "aws_iam_policy" "ssm_policy" {
 
 resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
   count      = length(var.ssm_parameter_names)
-  role       = local.role_name
+  role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.ssm_policy[count.index].arn
 }
 
@@ -171,7 +171,7 @@ resource "aws_iam_policy" "kms_policy" {
 
 resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
   count      = var.kms_key_arn != "" ? 1 : 0
-  role       = local.role_name
+  role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.kms_policy[count.index].arn
 }
 
@@ -181,6 +181,6 @@ resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
 
 resource "aws_iam_role_policy_attachment" "vpc_attachment" {
   count      = var.vpc_subnet_ids != null && var.vpc_security_group_ids != null ? 1 : 0
-  role       = local.role_name
+  role       = aws_iam_role.this.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }

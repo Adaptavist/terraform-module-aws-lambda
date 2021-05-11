@@ -1,3 +1,19 @@
+## [1.10.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.0...v1.10.1) (2021-05-10)
+
+
+### Bug Fixes
+
+* ploicy attachments depend on role creation ([f04d34b](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/f04d34bc9db14d6daf71a2d2a61148e631075da2))
+* reference the name from the role resource ([855eae9](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/855eae91a50962ad6e8fd3fdbad10b8802ba7bee))
+* remove unused depends on ([496016a](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/496016ae60ab34e67bf395156e42bb03d0baee23))
+
+# [1.10.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.9.0...v1.10.0) (2021-04-19)
+
+
+### Features
+
+* added region as mandatory variable ([af27e20](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/af27e20fa8aa1b65bade23fb94ad8a713672ec6e))
+
 # [1.9.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.1...v1.9.0) (2021-03-03)
 
 
