@@ -1,3 +1,10 @@
+## [1.10.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.1...v1.10.2) (2021-05-20)
+
+
+### Bug Fixes
+
+* corrected semantic release and added checkov ([e3ad670](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e3ad6705dd93da51c4e948b34e0486f2cb0f558d))
+
 ## [1.10.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.0...v1.10.1) (2021-05-10)
 
 
