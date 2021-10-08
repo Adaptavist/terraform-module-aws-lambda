@@ -1,3 +1,10 @@
+# [1.11.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.2...v1.11.0) (2021-10-08)
+
+
+### Features
+
+* updated labels module ([daa70a8](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/daa70a892659bb5b6ce1c45419e701a94c4a58b3))
+
 ## [1.10.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.1...v1.10.2) (2021-05-20)
 
 
