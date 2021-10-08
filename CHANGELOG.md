@@ -1,3 +1,33 @@
+## [1.10.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.1...v1.10.2) (2021-05-20)
+
+
+### Bug Fixes
+
+* corrected semantic release and added checkov ([e3ad670](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e3ad6705dd93da51c4e948b34e0486f2cb0f558d))
+
+## [1.10.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.0...v1.10.1) (2021-05-10)
+
+
+### Bug Fixes
+
+* ploicy attachments depend on role creation ([f04d34b](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/f04d34bc9db14d6daf71a2d2a61148e631075da2))
+* reference the name from the role resource ([855eae9](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/855eae91a50962ad6e8fd3fdbad10b8802ba7bee))
+* remove unused depends on ([496016a](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/496016ae60ab34e67bf395156e42bb03d0baee23))
+
+# [1.10.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.9.0...v1.10.0) (2021-04-19)
+
+
+### Features
+
+* added region as mandatory variable ([af27e20](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/af27e20fa8aa1b65bade23fb94ad8a713672ec6e))
+
+# [1.9.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.1...v1.9.0) (2021-03-03)
+
+
+### Features
+
+* added assume_role_policy_principles variable ([433699c](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/433699c11402d6889fa09629c4732fedd4223c81))
+
 ## [1.8.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.8.0...v1.8.1) (2021-02-26)
 
 

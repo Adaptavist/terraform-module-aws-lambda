@@ -17,6 +17,11 @@ variable "tags" {
   type = map(string)
 }
 
+variable "aws_region" {
+  type        = string
+  description = "AWS Region"
+}
+
 variable "include_region" {
   type        = bool
   default     = false
@@ -82,6 +87,15 @@ variable "environment_variables" {
   description = "Environment variables"
   type        = map(string)
   default     = {}
+}
+
+variable "assume_role_policy_principles" {
+  description = "Principles which can assume the lambdas role."
+  type        = list(string)
+  default = [
+    "lambda.amazonaws.com",
+    "edgelambda.amazonaws.com"
+  ]
 }
 
 // Tracing

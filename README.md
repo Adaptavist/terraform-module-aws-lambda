@@ -11,31 +11,36 @@ This module creates a set of AWS Lambda resources including the packaging of fun
 
 ## Variables
 
-| Name                           | Type    | Default | Required | Description                                                                
-| ------------------------------ | ------- | ------- | -------- | -------------------------------------------------------------------------- 
-| function_name                  | string  |         | ✓        | A unique name for the lambda function                                      
-| description                    | string  |         | ✓        | A description of the lambda function                                       
-| disable_label_function_name_prefix| bool | false   |          | Indicates if prefixing of the lambda function name should be disabled. Defaults to false
-| lambda_code_dir                | string  |         | ✓        | A directory containing the code that needs to be packaged                  
-| handler                        | string  |         | ✓        | The function entrypoint                                                    
-| runtime                        | string  |         | ✓        | The runtime environment for the Lambda function. Valid Values: nodejs10.x nodejs12.x java8 java11 python2.7 python3.6 python3.7 python3.8 dotnetcore2.1 dotnetcore3.1 go1.x ruby2.5 ruby2.7 provided                            
-| memory_size                    | integer | 128     |          | Amount of memory in MB your Lambda Function can use at runtime             
-| reserved_concurrent_executions | string  | -1      |          | The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations.
-| timeout                        | integer |         | ✓        | timeout                                                                    
-| kms_key_arn                    | string  |         |          | KMS key used for decryption                                                
-| environment_variables          | map     |         |          | Environment variables
-| enable_tracing                 | bool    | false   |          | Enables X-Ray. If true, tracing_mode variable is required
-| tracing_mode                   | string  |         |          | Mandatory if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode
-| enable_cloudwatch_logs         | bool    | true    |          | Enable cloudwatch logs
-| cloudwatch_retention_in_days   | integer | 14      |          | The number of days you want to retain log events in lambda's log group
-| cloudwatch_kms_key_arn         | string  |         |          | The ARN of the KMS Key to use when encrypting log data
-| vpc_subnet_ids                 | list    |         |          | Allows the function to access VPC subnets (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
-| vpc_security_group_ids         | list    |         |          | Allows the function to access VPC (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details).
-| ssm_parameter_names            | list    |         |          | Names of SSM parameters that lambda will be able to access
-| namespace                      | string  |         | ✓        | Namespace used for labeling resources                  
-| name                           | string  |         | ✓        | Name of the module / resources                         
-| stage                          | string  |         | ✓        | What staga are the resources for? staging, production? 
-| tags                           | map     |         | ✓        | Map of tags to be applied to all resources             
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| assume\_role\_policy\_principles | Princliples which can assume the lambdas role. | `list(string)` | <pre>[<br>  "lambda.amazonaws.com",<br>  "edgelambda.amazonaws.com"<br>]</pre> | no |
+| cloudwatch\_kms\_key\_arn | The ARN of the KMS Key to use when encrypting log data | `string` | `null` | no |
+| cloudwatch\_retention\_in\_days | The number of days you want to retain log events in lambda's log group | `number` | `14` | no |
+| description | A description of the lambda function. | `any` | n/a | yes |
+| disable\_label\_function\_name\_prefix | Indicates if prefixing of the lambda function name should be disabled. Defaults to false | `bool` | `false` | no |
+| enable\_cloudwatch\_logs | Enable cloudwatch logs | `bool` | `true` | no |
+| enable\_tracing | Enable tracing of requests. If tracing is enabled, tracing mode needs to be specified. | `bool` | `false` | no |
+| environment\_variables | Environment variables | `map(string)` | `{}` | no |
+| external\_lambda\_hash | n/a | `string` | `""` | no |
+| function\_name | A unique name for the lambda function. | `string` | n/a | yes |
+| handler | The function entrypoint. | `string` | n/a | yes |
+| include\_region | If set to true the current providers region will be appended to any global AWS resources such as IAM roles | `bool` | `false` | no |
+| kms\_key\_arn | KMS key used for decryption | `string` | `""` | no |
+| lambda\_code\_dir | A directory containing the code that needs to be packaged. | `string` | `"src"` | no |
+| memory\_size | Amount of memory in MB your Lambda Function can use at runtime | `string` | `"128"` | no |
+| name | n/a | `string` | `"function"` | no |
+| namespace | n/a | `string` | n/a | yes |
+| publish\_lambda | Whether to publish creation/change as new Lambda Function Version. | `bool` | `false` | no |
+| reserved\_concurrent\_executions | The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. | `number` | `-1` | no |
+| runtime | The runtime environment for the Lambda function. Valid Values: nodejs10.x \| nodejs12.x \| java8 \| java11 \| python2.7 \| python3.6 \| python3.7 \| python3.8 \| dotnetcore2.1 \| dotnetcore3.1 \| go1.x \| ruby2.5 \| ruby2.7 \| provided | `string` | n/a | yes |
+| ssm\_parameter\_names | Names of SSM parameters that lambda will be able to access | `list(string)` | `[]` | no |
+| stage | n/a | `string` | n/a | yes |
+| tags | n/a | `map(string)` | n/a | yes |
+| timeout | timeout | `any` | n/a | yes |
+| tracing\_mode | Required if tracing is enabled. Possible values: PassThrough or Active. See https://www.terraform.io/docs/providers/aws/r/lambda_function.html#mode | `string` | `null` | no |
+| vpc\_security\_group\_ids | Allows the function to access VPC (if both 'subnet\_ids' and 'security\_group\_ids' are empty then vpc\_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details). | `list(string)` | `[]` | no |
+| vpc\_subnet\_ids | Allows the function to access VPC subnets (if both 'subnet\_ids' and 'security\_group\_ids' are empty then vpc\_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details). | `list(string)` | `[]` | no |
+   
 
 ## Outputs
 

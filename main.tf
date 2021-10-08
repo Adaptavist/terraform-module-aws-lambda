@@ -12,12 +12,11 @@ module "labels" {
   tags      = var.tags
 }
 
-data "aws_region" "this" {}
-
 data "aws_caller_identity" "this" {}
 
 locals {
   function_name = var.disable_label_function_name_prefix ? var.function_name : "${module.labels.id}-${var.function_name}"
+  role_name     = var.include_region ? "${local.function_name}-${var.aws_region}" : local.function_name
 }
 
 // package
@@ -35,23 +34,24 @@ data "aws_iam_policy_document" "assume_role_policy" {
     actions = ["sts:AssumeRole"]
 
     principals {
-      type = "Service"
-      identifiers = [
-        "lambda.amazonaws.com",
-        "edgelambda.amazonaws.com"
-      ]
+      type        = "Service"
+      identifiers = var.assume_role_policy_principles
     }
   }
 }
 
 resource "aws_iam_role" "this" {
-  name               = var.include_region ? "${local.function_name}-${data.aws_region.this.name}" : local.function_name
+  name               = local.role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
   tags = module.labels.tags
 }
 
 resource "aws_lambda_function" "this" {
+  #checkov:skip=CKV_AWS_50:X-ray tracing not enforced in Adaptavist
+  #checkov:skip=CKV_AWS_115:Lambda dead letter queue not enforced in Adaptavist
+  #checkov:skip=CKV_AWS_116:Lambda dead letter queue not enforced in Adaptavist
+
   function_name = local.function_name
   description   = var.description
 
@@ -128,7 +128,7 @@ data "aws_iam_policy_document" "ssm_policy_document" {
     ]
 
     resources = [
-      "arn:aws:ssm:${data.aws_region.this.name}:${data.aws_caller_identity.this.account_id}:parameter/${element(var.ssm_parameter_names, count.index)}",
+      "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.this.account_id}:parameter/${element(var.ssm_parameter_names, count.index)}",
     ]
   }
 
@@ -136,7 +136,7 @@ data "aws_iam_policy_document" "ssm_policy_document" {
 
 resource "aws_iam_policy" "ssm_policy" {
   count       = length(var.ssm_parameter_names)
-  name        = "${aws_lambda_function.this.function_name}-ssm-${count.index}-${data.aws_region.this.name}"
+  name        = "${aws_lambda_function.this.function_name}-ssm-${count.index}-${var.aws_region}"
   description = "Provides minimum Parameter Store permissions for ${aws_lambda_function.this.function_name}."
   policy      = data.aws_iam_policy_document.ssm_policy_document[count.index].json
 }
@@ -164,7 +164,7 @@ data "aws_iam_policy_document" "kms_policy_document" {
 
 resource "aws_iam_policy" "kms_policy" {
   count       = var.kms_key_arn != "" ? 1 : 0
-  name        = "${aws_lambda_function.this.function_name}-kms-${data.aws_region.this.name}"
+  name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
   description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
   policy      = data.aws_iam_policy_document.kms_policy_document.json
 }
