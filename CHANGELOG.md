@@ -1,3 +1,10 @@
+## [1.11.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.11.0...v1.11.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* updated docs ([15204d3](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/15204d3b91c957dc63e75e090f084acbcc603570))
+
 # [1.11.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.10.2...v1.11.0) (2021-10-08)
 
 
