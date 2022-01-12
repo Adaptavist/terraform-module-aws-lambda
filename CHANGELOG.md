@@ -1,3 +1,10 @@
+# [1.12.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.11.1...v1.12.0) (2022-01-12)
+
+
+### Features
+
+* adding required provider ([0a990fc](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/0a990fc60d13c59a819da364ea7f8c3e08287936))
+
 ## [1.11.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.11.0...v1.11.1) (2021-12-20)
 
 
