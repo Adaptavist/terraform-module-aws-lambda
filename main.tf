@@ -64,6 +64,7 @@ resource "aws_lambda_function" "this" {
   timeout                        = var.timeout
   kms_key_arn                    = var.kms_key_arn
   publish                        = var.publish_lambda
+  layers                         = var.layers
 
   filename         = data.archive_file.this.output_path
   source_code_hash = data.archive_file.this.output_base64sha256
