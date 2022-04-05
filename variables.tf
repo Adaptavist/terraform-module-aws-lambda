@@ -98,6 +98,12 @@ variable "assume_role_policy_principles" {
   ]
 }
 
+variable "layers" {
+  description = "Expected Layers to attach to the lambda"
+  type        = list(string)
+  default = [ ]
+}
+
 // Tracing
 
 variable "enable_tracing" {
