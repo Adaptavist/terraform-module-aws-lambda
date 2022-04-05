@@ -1,3 +1,10 @@
+# [1.13.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.12.0...v1.13.0) (2022-04-05)
+
+
+### Features
+
+* **AVSTCLOUD-800:** allow passing lambda layers ([29286f3](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/29286f327710a73b9517ecb7e9406ca279addc97))
+
 # [1.12.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.11.1...v1.12.0) (2022-01-12)
 
 
