@@ -96,6 +96,11 @@ resource "aws_lambda_function" "this" {
 
 // X-Ray and cloudwatch
 
+
+resource "aws_kms_key" "this" {
+  count      = var.aws_cloudwatch_log_group.kms_key_arn ? 1 : 0
+}
+
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
   role       = aws_iam_role.this.name
