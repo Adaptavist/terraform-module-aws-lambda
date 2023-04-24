@@ -97,8 +97,8 @@ resource "aws_lambda_function" "this" {
 // X-Ray and cloudwatch
 
 
-resource "aws_kms_key" "this" {
-  count      = var.aws_cloudwatch_log_group.kms_key_arn ? 1 : 0
+resource "aws_kms_key" "cloud_watch_kms_key" {
+  count      = var.aws_cloudwatch_log_group ? 1 : 0
 }
 
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
@@ -111,7 +111,7 @@ resource "aws_cloudwatch_log_group" "this" {
   count             = var.enable_cloudwatch_logs ? 1 : 0
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.cloudwatch_retention_in_days
-  kms_key_id        = aws_kms_key.this.arn 
+  kms_key_id        = aws_kms_key.cloud_watch_kms_key.arn
   tags              = module.labels.tags
 }
 
