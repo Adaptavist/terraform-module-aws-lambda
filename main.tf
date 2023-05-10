@@ -96,11 +96,6 @@ resource "aws_lambda_function" "this" {
 
 // X-Ray and cloudwatch
 
-
-resource "aws_kms_key" "cloud_watch_kms_key" {
-  count      = var.aws_cloudwatch_log_group ? 1 : 0
-}
-
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
   role       = aws_iam_role.this.name
@@ -111,7 +106,7 @@ resource "aws_cloudwatch_log_group" "this" {
   count             = var.enable_cloudwatch_logs ? 1 : 0
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.cloudwatch_retention_in_days
-  kms_key_id        = aws_kms_key.cloud_watch_kms_key.arn
+  kms_key_id        = var.kms_key_arn == "" ? aws_kms_key.cloud_watch_kms_key[count.index].arn : var.kms_key_arn
   tags              = module.labels.tags
 }
 
@@ -155,6 +150,12 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
 }
 
 // KMS
+
+resource "aws_kms_key" "cloud_watch_kms_key" {
+  count  = var.kms_key_arn == "" ? 1 : 0
+  enable_key_rotation    = true
+}
+
 
 data "aws_iam_policy_document" "kms_policy_document" {
   statement {
