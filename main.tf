@@ -2,6 +2,7 @@
   experiments = [variable_validation]
 }*/
 
+
 module "labels" {
   source  = "cloudposse/label/null"
   version = "0.25.0"
@@ -47,6 +48,7 @@ resource "aws_iam_role" "this" {
   tags = module.labels.tags
 }
 
+
 resource "aws_lambda_function" "this" {
   #checkov:skip=CKV_AWS_50:X-ray tracing not enforced in Adaptavist
   #checkov:skip=CKV_AWS_115:Lambda dead letter queue not enforced in Adaptavist
@@ -62,7 +64,7 @@ resource "aws_lambda_function" "this" {
   handler                        = var.handler
   reserved_concurrent_executions = var.reserved_concurrent_executions
   timeout                        = var.timeout
-  kms_key_arn                    = var.kms_key_arn
+  kms_key_arn                    = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
   publish                        = var.publish_lambda
   layers                         = var.layers
 
@@ -91,10 +93,16 @@ resource "aws_lambda_function" "this" {
     }
   }
 
+  dead_letter_config {
+   target_arn = aws_sqs_queue.dlq_sqs_queue.arn
+ }
+
   tags = module.labels.tags
 }
 
 // X-Ray and cloudwatch
+
+
 
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
@@ -102,11 +110,10 @@ resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
 }
 
-resource "aws_cloudwatch_log_group" "this" {
-  count             = var.enable_cloudwatch_logs ? 1 : 0
+resource "aws_cloudwatch_log_group" "cloudwatch_log_group" {
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.cloudwatch_retention_in_days
-  kms_key_id        = var.kms_key_arn == "" ? aws_kms_key.cloud_watch_kms_key[count.index].arn : var.kms_key_arn
+  kms_key_id        = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
   tags              = module.labels.tags
 }
 
@@ -151,11 +158,12 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
 
 // KMS
 
-resource "aws_kms_key" "cloud_watch_kms_key" {
+resource "aws_kms_key" "kms_key" {
   count  = var.kms_key_arn == "" ? 1 : 0
+  policy      = data.aws_iam_policy_document.kms_policy.json
+  tags        = var.tags
   enable_key_rotation    = true
 }
-
 
 data "aws_iam_policy_document" "kms_policy_document" {
   statement {
@@ -190,4 +198,143 @@ resource "aws_iam_role_policy_attachment" "vpc_attachment" {
   count      = var.vpc_subnet_ids != null && var.vpc_security_group_ids != null ? 1 : 0
   role       = aws_iam_role.this.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
+
+
+// SQS DLQ
+
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
+
+resource "aws_sqs_queue" "dlq_sqs_queue" {
+  name                      = "${local.function_name}-dlq.fifo"
+  kms_master_key_id         = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
+  fifo_queue                = true
+  deduplication_scope       = "messageGroup"
+  fifo_throughput_limit     = "perMessageGroupId"
+  message_retention_seconds = 1209600 # 14 days which is the max
+  policy                    = data.aws_iam_policy_document.dlq_sqs_policy.json
+
+  redrive_allow_policy = jsonencode({
+    redrivePermission = "byQueue",
+    sourceQueueArns   = ["arn:aws:sqs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${local.function_name}.fifo"] // We have to build arn like this or we get a cycle
+  })
+
+  tags = var.tags
+}
+
+
+# resource "aws_kms_key" "kms_key" {
+#   description = "Key used for the SQS queue ${local.function_name}"
+#   policy      = data.aws_iam_policy_document.kms_policy.json
+#   tags        = var.tags
+#   enable_key_rotation    = true
+
+# }
+
+resource "aws_kms_alias" "kms_alias" {
+  name          = "alias/${local.function_name}"
+  target_key_id = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
+}
+
+resource "aws_cloudwatch_metric_alarm" "dlq_alarm" {
+  alarm_name                = "${local.function_name}-dlq"
+  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  evaluation_periods        = "1"
+  metric_name               = "ApproximateNumberOfMessagesVisible"
+  namespace                 = "AWS/SQS"
+  period                    = "60"
+  statistic                 = "Sum"
+  alarm_actions             = []
+  threshold                 = "1"
+  alarm_description         = "This metric monitors DLQ length"
+  insufficient_data_actions = []
+  tags                      = var.tags
+
+  dimensions = {
+    QueueName = aws_sqs_queue.dlq_sqs_queue.name
+  }
+}
+
+data "aws_iam_policy_document" "sqs_policy" {
+
+  statement {
+    sid    = "lambda_receive"
+    effect = "Allow"
+    actions = [
+      "sqs:ReceiveMessage",
+      "sqs:Get*",
+      "sqs:Delete*"
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "lambda_send_message"
+    effect = "Allow"
+    actions = [
+      "sqs:SendMessage"
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+
+    resources = ["*"]
+  }
+}
+
+
+data "aws_iam_policy_document" "dlq_sqs_policy" {
+
+  statement {
+    sid    = "lambda_receive"
+    effect = "Allow"
+    actions = [
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage"
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+    }
+
+    resources = ["*"]
+  }
+}
+
+data "aws_iam_policy_document" "kms_policy" {
+
+  statement {
+    sid     = "s3_access"
+    effect  = "Allow"
+    actions = ["kms:*"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+    resources = ["*"]
+  }
+
+  statement {
+    sid     = "account_access"
+    effect  = "Allow"
+    actions = ["kms:*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+    }
+    resources = ["*"]
+  }
 }
