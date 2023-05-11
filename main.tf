@@ -70,6 +70,7 @@ resource "aws_lambda_function" "this" {
 
   filename         = data.archive_file.this.output_path
   source_code_hash = data.archive_file.this.output_base64sha256
+  code_signing_config_arn = aws_lambda_code_signing_config.code_signinig_config.arn
 
   dynamic "environment" {
     for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
@@ -252,10 +253,24 @@ resource "aws_cloudwatch_metric_alarm" "dlq_alarm" {
   insufficient_data_actions = []
   tags                      = var.tags
 
+
   dimensions = {
     QueueName = aws_sqs_queue.dlq_sqs_queue.name
   }
 }
+// code signing
+
+resource "aws_lambda_code_signing_config" "code_signinig_config" {
+  allowed_publishers {
+    signing_profile_version_arns = length(var.lambda_code_signing_profile_arns) == 0 ? [join("", aws_signer_signing_profile.signing_profile[*].arn)] : var.lambda_code_signing_profile_arns
+  }
+}
+
+resource "aws_signer_signing_profile" "signing_profile" {
+  count = length(var.lambda_code_signing_profile_arns) == 0 ? 1 : 0
+  platform_id = "AWSLambda-SHA384-ECDSA"
+}
+
 
 data "aws_iam_policy_document" "sqs_policy" {
 
@@ -338,3 +353,5 @@ data "aws_iam_policy_document" "kms_policy" {
     resources = ["*"]
   }
 }
+
+
