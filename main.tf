@@ -53,6 +53,7 @@ resource "aws_lambda_function" "this" {
   #checkov:skip=CKV_AWS_50:X-ray tracing not enforced in Adaptavist
   #checkov:skip=CKV_AWS_115:Lambda dead letter queue not enforced in Adaptavist
   #checkov:skip=CKV_AWS_116:Lambda dead letter queue not enforced in Adaptavist
+  #checkov:skip=CKV_AWS_117:Lambdas in the default VPC security groups are hardened appropriately
 
   function_name = local.function_name
   description   = var.description
