@@ -1,3 +1,10 @@
+# [1.14.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.13.0...v1.14.0) (2023-05-23)
+
+
+### Features
+
+* **DP-1249:** checkov skip ([cde8de9](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/cde8de92560490ce624647963d8daeb3096a4d8a))
+
 # [1.13.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.12.0...v1.13.0) (2022-04-05)
 
 
