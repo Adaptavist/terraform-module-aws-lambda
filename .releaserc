@@ -6,4 +6,5 @@ plugins:
   - "@semantic-release/git"
   - "@semantic-release/release-notes-generator"
   - - "@semantic-release/exec"
+    - successCmd: git pull --mirror git@github.com:Adaptavist/terraform-module-aws-lambda.git
     - successCmd: git push --mirror git@github.com:Adaptavist/terraform-module-aws-lambda.git
