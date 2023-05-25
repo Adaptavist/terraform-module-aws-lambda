@@ -1,3 +1,10 @@
+# [1.19.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.18.0...v1.19.0) (2023-05-25)
+
+
+### Features
+
+* **DP-1249:** alias fix ([e31b98a](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e31b98a6824f2e886a496148119391229c473c5a))
+
 # [1.18.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.17.0...v1.18.0) (2023-05-25)
 
 
