@@ -1,3 +1,10 @@
+# [1.17.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.16.0...v1.17.0) (2023-05-25)
+
+
+### Features
+
+* **DP-1249:** cloudwatcharn ([80f1541](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/80f1541ee5980064b9be5659b0e0e726460bf538))
+
 # [1.16.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.15.0...v1.16.0) (2023-05-25)
 
 
