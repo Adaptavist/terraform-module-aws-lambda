@@ -1,3 +1,10 @@
+# [1.18.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.17.0...v1.18.0) (2023-05-25)
+
+
+### Features
+
+* **DP-1249:** cloudwatch string ([1dd2c65](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/1dd2c655c1278e99f8470bbe0f77ed6a1325dabc))
+
 # [1.17.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.16.0...v1.17.0) (2023-05-25)
 
 
