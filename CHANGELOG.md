@@ -1,3 +1,10 @@
+# [1.20.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.19.0...v1.20.0) (2023-05-25)
+
+
+### Features
+
+* **DP-1249:** kms key fixes ([57c3270](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/57c327045f765a49893ffffdfe74357a7c1fdc84))
+
 # [1.19.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.18.0...v1.19.0) (2023-05-25)
 
 
