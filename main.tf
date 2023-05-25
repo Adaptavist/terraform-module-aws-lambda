@@ -180,14 +180,14 @@ data "aws_iam_policy_document" "kms_policy_document" {
 }
 
 resource "aws_iam_policy" "kms_policy" {
-  count       = var.kms_key_arn != "" ? 1 : 0
+  count       = var.kms_key_arn == "" ? 1 : 0
   name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
   description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
   policy      = data.aws_iam_policy_document.kms_policy_document.json
 }
 
 resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
-  count      = var.kms_key_arn != "" ? 1 : 0
+  count      = var.kms_key_arn == "" ? 1 : 0
   role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.kms_policy[count.index].arn
 }
@@ -236,7 +236,7 @@ resource "aws_sqs_queue" "dlq_sqs_queue" {
 # }
 
 resource "aws_kms_alias" "kms_alias" {
-  count      = var.kms_key_arn != "" ? 1 : 0
+  count        = var.kms_key_arn == "" ? 1 : 0
   name          = "alias/${local.function_name}"
   target_key_id = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
 }
