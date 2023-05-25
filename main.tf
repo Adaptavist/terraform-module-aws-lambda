@@ -236,6 +236,7 @@ resource "aws_sqs_queue" "dlq_sqs_queue" {
 # }
 
 resource "aws_kms_alias" "kms_alias" {
+  count      = var.kms_key_arn != "" ? 1 : 0
   name          = "alias/${local.function_name}"
   target_key_id = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
 }
