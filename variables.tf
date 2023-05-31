@@ -83,6 +83,12 @@ variable "kms_key_arn" {
   description = "KMS key used for decryption"
   default     = ""
 }
+
+variable "dlq_arn" {
+  description = "Optional DLQ arn for Lambda"
+  default     = ""
+}
+
 variable "environment_variables" {
   description = "Environment variables"
   type        = map(string)
