@@ -1,3 +1,10 @@
+# [1.30.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.29.0...v1.30.0) (2023-05-31)
+
+
+### Features
+
+* **DP-1249:** dlq redrive change ([a701f56](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/a701f567de63b76766711fa8182c32304e0d068d))
+
 # [1.29.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.28.0...v1.29.0) (2023-05-31)
 
 
