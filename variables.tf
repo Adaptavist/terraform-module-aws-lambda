@@ -85,7 +85,7 @@ variable "kms_key_arn" {
 }
 
 variable "dlq_arn" {
-  description = "Optional DLQ arn for Lambda"
+  description = "Option to provide DLQ arn for Lambda"
   default     = ""
 }
 
