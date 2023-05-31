@@ -217,7 +217,7 @@ resource "aws_sqs_queue" "dlq_sqs_queue" {
 
   redrive_allow_policy = jsonencode({
     redrivePermission = "byQueue",
-    sourceQueueArns   = ["arn:aws:sqs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${local.function_name}.fifo"] // We have to build arn like this or we get a cycle
+    sourceQueueArns   = ["arn:aws:sqs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${local.function_name}"] // We have to build arn like this or we get a cycle
   })
 
   tags = var.tags
