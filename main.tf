@@ -223,6 +223,11 @@ resource "aws_sqs_queue" "dlq_sqs_queue" {
   tags = var.tags
 }
 
+resource "aws_iam_role_policy_attachment" "sqs_policy_attachment" {
+  role       = aws_iam_role.this.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+}
+
 
 # resource "aws_kms_key" "kms_key" {
 #   description = "Key used for the SQS queue ${local.function_name}"
