@@ -84,15 +84,6 @@ variable "kms_key_arn" {
   default     = ""
 }
 
-variable "dlq_arn" {
-  description = "Option to provide DLQ arn for Lambda, must also provide name"
-  default     = ""
-}
-variable "dlq_name" {
-  description = "Required if DLQ ARN is provided"
-  default     = ""
-}
-
 variable "environment_variables" {
   description = "Environment variables"
   type        = map(string)

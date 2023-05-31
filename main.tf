@@ -96,7 +96,7 @@ resource "aws_lambda_function" "this" {
   }
 
   dead_letter_config {
-   target_arn = var.dlq_arn == ""  ? join ("" , aws_sqs_queue.dlq_sqs_queue[*].arn) : var.dlq_arn
+   target_arn =  aws_sqs_queue.dlq_sqs_queue.arn
  }
 
   tags = module.labels.tags
@@ -210,10 +210,9 @@ data "aws_region" "current" {}
 
 
 resource "aws_sqs_queue" "dlq_sqs_queue" {
-  count                     = var.dlq_arn == ""  ? 1 : 0
   name                      = "${local.function_name}-dlq.fifo"
   kms_master_key_id         = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
-  fifo_queue                = true
+  fifo_queue                = false
   deduplication_scope       = "messageGroup"
   fifo_throughput_limit     = "perMessageGroupId"
   message_retention_seconds = 1209600 # 14 days which is the max
@@ -258,7 +257,7 @@ resource "aws_cloudwatch_metric_alarm" "dlq_alarm" {
 
 
   dimensions = {
-    QueueName = var.dlq_name == "" ?  join("",aws_sqs_queue.dlq_sqs_queue[*].name) : var.dlq_name
+    QueueName = aws_sqs_queue.dlq_sqs_queue.name
   }
 }
 // code signing
