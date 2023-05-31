@@ -1,3 +1,10 @@
+# [1.22.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.21.0...v1.22.0) (2023-05-31)
+
+
+### Features
+
+* **DP-1249:** dlq arn ([f54df46](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/f54df462d09ddd6dacd675e63976345d223a42a1))
+
 # [1.21.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.20.0...v1.21.0) (2023-05-31)
 
 
