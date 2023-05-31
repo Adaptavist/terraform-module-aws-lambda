@@ -212,9 +212,6 @@ data "aws_region" "current" {}
 resource "aws_sqs_queue" "dlq_sqs_queue" {
   name                      = "${local.function_name}-dlq.fifo"
   kms_master_key_id         = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
-  fifo_queue                = false
-  deduplication_scope       = "messageGroup"
-  fifo_throughput_limit     = "perMessageGroupId"
   message_retention_seconds = 1209600 # 14 days which is the max
   policy                    = data.aws_iam_policy_document.dlq_sqs_policy.json
 
