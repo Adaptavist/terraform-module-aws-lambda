@@ -1,3 +1,10 @@
+# [1.32.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.31.0...v1.32.0) (2023-05-31)
+
+
+### Features
+
+* **DP-1249:** permissions change 2 ([62228f6](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/62228f62f59fdeb3f816ed2516441f2ac2aa2178))
+
 # [1.31.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.30.0...v1.31.0) (2023-05-31)
 
 
