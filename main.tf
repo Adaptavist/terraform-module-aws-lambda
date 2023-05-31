@@ -96,7 +96,7 @@ resource "aws_lambda_function" "this" {
   }
 
   dead_letter_config {
-   target_arn = var.dlq_arn == ""  ? aws_sqs_queue.dlq_sqs_queue.arn : var.dlq_arn
+   target_arn = var.dlq_arn == ""  ? join ("" , aws_sqs_queue.dlq_sqs_queue[*].arn) : var.dlq_arn
  }
 
   tags = module.labels.tags
