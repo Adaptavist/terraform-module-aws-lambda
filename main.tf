@@ -258,7 +258,7 @@ resource "aws_cloudwatch_metric_alarm" "dlq_alarm" {
 
 
   dimensions = {
-    QueueName = aws_sqs_queue.dlq_sqs_queue.name[count.index]
+    QueueName = aws_sqs_queue.dlq_sqs_queue[*].name
   }
 }
 // code signing
