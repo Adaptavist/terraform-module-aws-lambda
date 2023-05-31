@@ -314,7 +314,8 @@ data "aws_iam_policy_document" "dlq_sqs_policy" {
     effect = "Allow"
     actions = [
       "sqs:ReceiveMessage",
-      "sqs:DeleteMessage"
+      "sqs:DeleteMessage",
+      "sqs:SendMessage"
     ]
 
     principals {
