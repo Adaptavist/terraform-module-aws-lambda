@@ -1,3 +1,10 @@
+# [1.28.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.27.0...v1.28.0) (2023-05-31)
+
+
+### Features
+
+* **DP-1249:** dlq arn removed all ([ff22192](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/ff221926dd342438cda50b5340aa7002e1d4abb3))
+
 # [1.27.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.26.0...v1.27.0) (2023-05-31)
 
 
