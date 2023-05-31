@@ -1,3 +1,10 @@
+# [1.29.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.28.0...v1.29.0) (2023-05-31)
+
+
+### Features
+
+* **DP-1249:** dlq name change ([5d4d79f](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/5d4d79ff3d5a8dbe298a29220417b38381dd6a9a))
+
 # [1.28.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.27.0...v1.28.0) (2023-05-31)
 
 
