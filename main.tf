@@ -210,7 +210,7 @@ data "aws_region" "current" {}
 
 
 resource "aws_sqs_queue" "dlq_sqs_queue" {
-  count                     = var.dlq_arn == ""  ? 1 :0
+  count                     = var.dlq_arn == ""  ? 1 : 0
   name                      = "${local.function_name}-dlq.fifo"
   kms_master_key_id         = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
   fifo_queue                = true
@@ -258,7 +258,7 @@ resource "aws_cloudwatch_metric_alarm" "dlq_alarm" {
 
 
   dimensions = {
-    QueueName = aws_sqs_queue.dlq_sqs_queue.name
+    QueueName = aws_sqs_queue.dlq_sqs_queue.name[count.index]
   }
 }
 // code signing
