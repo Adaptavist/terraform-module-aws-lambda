@@ -83,7 +83,6 @@ variable "kms_key_arn" {
   description = "KMS key used for decryption"
   default     = ""
 }
-
 variable "environment_variables" {
   description = "Environment variables"
   type        = map(string)
@@ -135,7 +134,7 @@ variable "enable_cloudwatch_logs" {
 variable "cloudwatch_retention_in_days" {
   description = "The number of days you want to retain log events in lambda's log group"
   type        = number
-  default     = 365
+  default     = 14
 }
 
 variable "cloudwatch_kms_key_arn" {
@@ -162,14 +161,6 @@ variable "vpc_security_group_ids" {
 
 variable "ssm_parameter_names" {
   description = "Names of SSM parameters that lambda will be able to access"
-  type        = list(string)
-  default     = []
-}
-
-// Code Signing Profiles
-
-variable "lambda_code_signing_profile_arns" {
-  description = "ARN list of code signing profiles for lambda config"
   type        = list(string)
   default     = []
 }

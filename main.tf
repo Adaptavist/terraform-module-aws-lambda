@@ -2,7 +2,6 @@
   experiments = [variable_validation]
 }*/
 
-
 module "labels" {
   source  = "cloudposse/label/null"
   version = "0.25.0"
@@ -48,7 +47,6 @@ resource "aws_iam_role" "this" {
   tags = module.labels.tags
 }
 
-
 resource "aws_lambda_function" "this" {
   #checkov:skip=CKV_AWS_50:X-ray tracing not enforced in Adaptavist
   #checkov:skip=CKV_AWS_115:Lambda dead letter queue not enforced in Adaptavist
@@ -65,13 +63,12 @@ resource "aws_lambda_function" "this" {
   handler                        = var.handler
   reserved_concurrent_executions = var.reserved_concurrent_executions
   timeout                        = var.timeout
-  kms_key_arn                    = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
+  kms_key_arn                    = var.kms_key_arn
   publish                        = var.publish_lambda
   layers                         = var.layers
 
   filename         = data.archive_file.this.output_path
   source_code_hash = data.archive_file.this.output_base64sha256
-  code_signing_config_arn = aws_lambda_code_signing_config.code_signinig_config.arn
 
   dynamic "environment" {
     for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
@@ -95,16 +92,10 @@ resource "aws_lambda_function" "this" {
     }
   }
 
-  dead_letter_config {
-   target_arn =  aws_sqs_queue.dlq_sqs_queue.arn
- }
-
   tags = module.labels.tags
 }
 
 // X-Ray and cloudwatch
-
-
 
 resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   count      = var.tracing_mode != null ? 1 : 0
@@ -112,10 +103,11 @@ resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
   policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
 }
 
-resource "aws_cloudwatch_log_group" "cloudwatch_log_group" {
+resource "aws_cloudwatch_log_group" "this" {
+  count             = var.enable_cloudwatch_logs ? 1 : 0
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.cloudwatch_retention_in_days
-  kms_key_id        = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
+  kms_key_id        = var.cloudwatch_kms_key_arn
   tags              = module.labels.tags
 }
 
@@ -160,13 +152,6 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
 
 // KMS
 
-resource "aws_kms_key" "kms_key" {
-  count  = var.kms_key_arn == "" ? 1 : 0
-  policy      = data.aws_iam_policy_document.kms_policy.json
-  tags        = var.tags
-  enable_key_rotation    = true
-}
-
 data "aws_iam_policy_document" "kms_policy_document" {
   statement {
     actions = [
@@ -180,14 +165,14 @@ data "aws_iam_policy_document" "kms_policy_document" {
 }
 
 resource "aws_iam_policy" "kms_policy" {
-  count       = var.kms_key_arn == "" ? 1 : 0
+  count       = var.kms_key_arn != "" ? 1 : 0
   name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
   description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
   policy      = data.aws_iam_policy_document.kms_policy_document.json
 }
 
 resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
-  count      = var.kms_key_arn == "" ? 1 : 0
+  count      = var.kms_key_arn != "" ? 1 : 0
   role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.kms_policy[count.index].arn
 }
@@ -201,162 +186,3 @@ resource "aws_iam_role_policy_attachment" "vpc_attachment" {
   role       = aws_iam_role.this.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
-
-
-// SQS DLQ
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
-
-resource "aws_sqs_queue" "dlq_sqs_queue" {
-  name                      = "${local.function_name}-dlq"
-  kms_master_key_id         = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
-  message_retention_seconds = 1209600 # 14 days which is the max
-  policy                    = data.aws_iam_policy_document.dlq_sqs_policy.json
-
-  redrive_allow_policy = jsonencode({
-    redrivePermission = "byQueue",
-    sourceQueueArns   = ["arn:aws:sqs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${local.function_name}"] // We have to build arn like this or we get a cycle
-  })
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "sqs_policy_attachment" {
-  role       = aws_iam_role.this.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
-}
-
-
-# resource "aws_kms_key" "kms_key" {
-#   description = "Key used for the SQS queue ${local.function_name}"
-#   policy      = data.aws_iam_policy_document.kms_policy.json
-#   tags        = var.tags
-#   enable_key_rotation    = true
-
-# }
-
-resource "aws_kms_alias" "kms_alias" {
-  count        = var.kms_key_arn == "" ? 1 : 0
-  name          = "alias/${local.function_name}"
-  target_key_id = var.kms_key_arn == "" ? join("" , aws_kms_key.kms_key[*].arn) : var.kms_key_arn
-}
-
-resource "aws_cloudwatch_metric_alarm" "dlq_alarm" {
-  alarm_name                = "${local.function_name}-dlq"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
-  evaluation_periods        = "1"
-  metric_name               = "ApproximateNumberOfMessagesVisible"
-  namespace                 = "AWS/SQS"
-  period                    = "60"
-  statistic                 = "Sum"
-  alarm_actions             = []
-  threshold                 = "1"
-  alarm_description         = "This metric monitors DLQ length"
-  insufficient_data_actions = []
-  tags                      = var.tags
-
-
-  dimensions = {
-    QueueName = aws_sqs_queue.dlq_sqs_queue.name
-  }
-}
-// code signing
-
-resource "aws_lambda_code_signing_config" "code_signinig_config" {
-  allowed_publishers {
-    signing_profile_version_arns = length(var.lambda_code_signing_profile_arns) == 0 ? [join("", aws_signer_signing_profile.signing_profile[*].arn)] : var.lambda_code_signing_profile_arns
-  }
-}
-
-resource "aws_signer_signing_profile" "signing_profile" {
-  count = length(var.lambda_code_signing_profile_arns) == 0 ? 1 : 0
-  platform_id = "AWSLambda-SHA384-ECDSA"
-}
-
-
-data "aws_iam_policy_document" "sqs_policy" {
-
-  statement {
-    sid    = "lambda_receive"
-    effect = "Allow"
-    actions = [
-      "sqs:ReceiveMessage",
-      "sqs:Get*",
-      "sqs:Delete*"
-    ]
-
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "lambda_send_message"
-    effect = "Allow"
-    actions = [
-      "sqs:SendMessage"
-    ]
-
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-
-    resources = ["*"]
-  }
-}
-
-
-data "aws_iam_policy_document" "dlq_sqs_policy" {
-
-  statement {
-    sid    = "lambda_receive"
-    effect = "Allow"
-    actions = [
-      "sqs:ReceiveMessage",
-      "sqs:DeleteMessage",
-      "sqs:SendMessage"
-    ]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
-    }
-
-    resources = ["*"]
-  }
-}
-
-data "aws_iam_policy_document" "kms_policy" {
-
-  statement {
-    sid     = "s3_access"
-    effect  = "Allow"
-    actions = ["kms:*"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-    resources = ["*"]
-  }
-
-  statement {
-    sid     = "account_access"
-    effect  = "Allow"
-    actions = ["kms:*"]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
-    }
-    resources = ["*"]
-  }
-}
-
-
