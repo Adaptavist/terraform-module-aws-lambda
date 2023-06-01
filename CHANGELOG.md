@@ -1,3 +1,10 @@
+# [1.33.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.32.0...v1.33.0) (2023-06-01)
+
+
+### Features
+
+* **DP-1249:** revert ([c06ae1e](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/c06ae1ebba3887d3d069bc6768589e5fe61d816d))
+
 # [1.32.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.31.0...v1.32.0) (2023-05-31)
 
 
