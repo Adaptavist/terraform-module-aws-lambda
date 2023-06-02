@@ -150,32 +150,32 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
   policy_arn = aws_iam_policy.ssm_policy[count.index].arn
 }
 
-// KMS
+# // KMS
 
-data "aws_iam_policy_document" "kms_policy_document" {
-  statement {
-    actions = [
-      "kms:Decrypt",
-    ]
+# data "aws_iam_policy_document" "kms_policy_document" {
+#   statement {
+#     actions = [
+#       "kms:Decrypt",
+#     ]
 
-    resources = [
-      var.kms_key_arn,
-    ]
-  }
-}
+#     resources = [
+#       var.kms_key_arn,
+#     ]
+#   }
+# }
 
-resource "aws_iam_policy" "kms_policy" {
-  count       = var.kms_key_arn != "" ? 1 : 0
-  name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
-  description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
-  policy      = data.aws_iam_policy_document.kms_policy_document.json
-}
+# resource "aws_iam_policy" "kms_policy" {
+#   count       = var.kms_key_arn != "" ? 1 : 0
+#   name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
+#   description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
+#   policy      = data.aws_iam_policy_document.kms_policy_document.json
+# }
 
-resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
-  count      = var.kms_key_arn != "" ? 1 : 0
-  role       = aws_iam_role.this.name
-  policy_arn = aws_iam_policy.kms_policy[count.index].arn
-}
+# resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
+#   count      = var.kms_key_arn != "" ? 1 : 0
+#   role       = aws_iam_role.this.name
+#   policy_arn = aws_iam_policy.kms_policy[count.index].arn
+# }
 
 // S3 policies are not part of this module. Module outputs lambda role name to enable attachment of additional policies, including S3
 
