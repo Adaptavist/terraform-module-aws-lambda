@@ -1,3 +1,10 @@
+# [1.34.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.33.0...v1.34.0) (2023-06-02)
+
+
+### Features
+
+* **DP-1249:** remove kms ([d525286](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/d52528634290e363522b1df241cd97b1d1a437b2))
+
 # [1.33.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.32.0...v1.33.0) (2023-06-01)
 
 
