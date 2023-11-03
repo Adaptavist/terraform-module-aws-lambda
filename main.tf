@@ -155,7 +155,6 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
 resource "aws_kms_key" "kms_key" {
   count               = var.kms_key_arn == "" ? 1 : 0
   description         = "Key used for the add record lambda ${var.function_name}"
-  policy              = data.aws_iam_policy_document.kms_policy.json
   tags                = var.tags
   is_enabled          = true
   enable_key_rotation = true
@@ -165,12 +164,15 @@ resource "aws_kms_key" "kms_key" {
 data "aws_iam_policy_document" "kms_policy_document" {
   statement {
     actions = [
+     "kms:Encrypt",
       "kms:Decrypt",
+      "kms:ReEncrypt*",
+      "kms:GenerateDataKey*",
+      "kms:DescribeKey",
     ]
 
-    resources = [
-      var.kms_key_arn,
-    ]
+    resources = ["*"]
+
   }
 }
 
