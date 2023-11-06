@@ -63,7 +63,7 @@ resource "aws_lambda_function" "this" {
   handler                        = var.handler
   reserved_concurrent_executions = var.reserved_concurrent_executions
   timeout                        = var.timeout
-  kms_key_arn                    = var.kms_key_arn
+  kms_key_arn                    = var.kms_key_arn ? var.kms_key_arn : aws_kms_key.kms_key.arn
   publish                        = var.publish_lambda
   layers                         = var.layers
 
@@ -152,30 +152,42 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
 
 # // KMS
 
-# data "aws_iam_policy_document" "kms_policy_document" {
-#   statement {
-#     actions = [
-#       "kms:Decrypt",
-#     ]
+resource "aws_kms_key" "kms_key" {
+  count               = var.kms_key_arn == "" ? 1 : 0
+  description         = "Key used for the add record lambda ${var.function_name}"
+  tags                = var.tags
+  is_enabled          = true
+  enable_key_rotation = true
+}
 
-#     resources = [
-#       var.kms_key_arn,
-#     ]
-#   }
-# }
 
-# resource "aws_iam_policy" "kms_policy" {
-#   count       = var.kms_key_arn != "" ? 1 : 0
-#   name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
-#   description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
-#   policy      = data.aws_iam_policy_document.kms_policy_document.json
-# }
+data "aws_iam_policy_document" "kms_policy_document" {
+  statement {
+    actions = [
+     "kms:Encrypt",
+      "kms:Decrypt",
+      "kms:ReEncrypt*",
+      "kms:GenerateDataKey*",
+      "kms:DescribeKey",
+    ]
 
-# resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
-#   count      = var.kms_key_arn != "" ? 1 : 0
-#   role       = aws_iam_role.this.name
-#   policy_arn = aws_iam_policy.kms_policy[count.index].arn
-# }
+    resources = ["*"]
+
+  }
+}
+
+resource "aws_iam_policy" "kms_policy" {
+  count       = var.kms_key_arn == "" ? 1 : 0
+  name        = "${aws_lambda_function.this.function_name}-kms-${var.aws_region}"
+  description = "Provides minimum KMS permissions for ${aws_lambda_function.this.function_name}."
+  policy      = data.aws_iam_policy_document.kms_policy_document.json
+}
+
+resource "aws_iam_role_policy_attachment" "kms_policy_attachment" {
+  count      = var.kms_key_arn == "" ? 1 : 0
+  role       = aws_iam_role.this.name
+  policy_arn = aws_iam_policy.kms_policy[count.index].arn
+}
 
 // S3 policies are not part of this module. Module outputs lambda role name to enable attachment of additional policies, including S3
 
