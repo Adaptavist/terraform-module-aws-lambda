@@ -1,3 +1,10 @@
+# [1.35.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.34.0...v1.35.0) (2024-04-04)
+
+
+### Features
+
+* adding architectures variable ([472030a](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/472030ab7d0144895b3d52a2ffbcb33c4fd15d87))
+
 # [1.34.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.33.0...v1.34.0) (2023-06-02)
 
 
