@@ -56,8 +56,9 @@ resource "aws_lambda_function" "this" {
   function_name = local.function_name
   description   = var.description
 
-  memory_size = var.memory_size
-  runtime     = var.runtime
+  memory_size   = var.memory_size
+  runtime       = var.runtime
+  architectures = var.architectures
 
   role                           = aws_iam_role.this.arn
   handler                        = var.handler
@@ -164,7 +165,7 @@ resource "aws_kms_key" "kms_key" {
 data "aws_iam_policy_document" "kms_policy_document" {
   statement {
     actions = [
-     "kms:Encrypt",
+      "kms:Encrypt",
       "kms:Decrypt",
       "kms:ReEncrypt*",
       "kms:GenerateDataKey*",

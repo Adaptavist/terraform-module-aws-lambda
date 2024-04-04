@@ -101,7 +101,13 @@ variable "assume_role_policy_principles" {
 variable "layers" {
   description = "Expected Layers to attach to the lambda"
   type        = list(string)
-  default = [ ]
+  default     = []
+}
+
+variable "architectures" {
+  type        = list(string)
+  default     = ["x86_64"]
+  description = "Instruction set architecture for your Lambda function."
 }
 
 // Tracing
