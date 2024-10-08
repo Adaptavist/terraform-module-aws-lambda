@@ -1,3 +1,10 @@
+## [1.35.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.0...v1.35.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* fix count resource error ([1e99258](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/1e99258f6d63cb0807a76afbf274cf56285aa334))
+
 # [1.35.0](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.34.0...v1.35.0) (2024-04-04)
 
 
