@@ -1,3 +1,10 @@
+## [1.35.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.1...v1.35.2) (2024-10-08)
+
+
+### Bug Fixes
+
+* bad condition for kms feeding ([ab3dfcc](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/ab3dfccd698d90dc94ccc392c92464194d5e77e3))
+
 ## [1.35.1](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.0...v1.35.1) (2024-10-08)
 
 
