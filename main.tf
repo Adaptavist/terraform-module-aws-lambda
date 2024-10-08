@@ -64,7 +64,7 @@ resource "aws_lambda_function" "this" {
   handler                        = var.handler
   reserved_concurrent_executions = var.reserved_concurrent_executions
   timeout                        = var.timeout
-  kms_key_arn                    = var.kms_key_arn ? var.kms_key_arn : aws_kms_key.kms_key.arn
+  kms_key_arn                    = var.kms_key_arn ? var.kms_key_arn : aws_kms_key.kms_key[0].arn
   publish                        = var.publish_lambda
   layers                         = var.layers
 
