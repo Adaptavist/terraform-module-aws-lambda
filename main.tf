@@ -3,8 +3,7 @@
 }*/
 
 module "labels" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
+  source = "git::https://github.com/cloudposse/terraform-null-label.git?ref=488ab91e34a24a86957e397d9f7262ec5925586a" # <-- version 0.25.0
 
   namespace = var.namespace
   stage     = var.stage
@@ -47,6 +46,31 @@ resource "aws_iam_role" "this" {
   tags = module.labels.tags
 }
 
+resource "aws_signer_signing_profile" "lambda_signing_profile" {
+  platform_id = "AWSLambda-SHA384-ECDSA"
+  name        = "${var.namespace}_${var.stage}_sp"
+
+  signature_validity_period {
+    value = 5
+    type  = "YEARS"
+  }
+
+  tags = module.labels.tags
+}
+
+resource "aws_lambda_code_signing_config" "lambda_signing_config" {
+
+  allowed_publishers {
+    signing_profile_version_arns = [aws_signer_signing_profile.lambda_signing_profile.arn]
+  }
+
+  policies {
+    untrusted_artifact_on_deployment = "Warn"
+  }
+
+  tags = module.labels.tags
+}
+
 resource "aws_lambda_function" "this" {
   #checkov:skip=CKV_AWS_50:X-ray tracing not enforced in Adaptavist
   #checkov:skip=CKV_AWS_115:Lambda dead letter queue not enforced in Adaptavist
@@ -68,8 +92,10 @@ resource "aws_lambda_function" "this" {
   publish                        = var.publish_lambda
   layers                         = var.layers
 
-  filename         = data.archive_file.this.output_path
-  source_code_hash = data.archive_file.this.output_base64sha256
+  filename = data.archive_file.this.output_path
+
+  source_code_hash        = data.archive_file.this.output_base64sha256
+  code_signing_config_arn = aws_lambda_code_signing_config.lambda_signing_config.arn
 
   dynamic "environment" {
     for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
@@ -105,6 +131,7 @@ resource "aws_iam_role_policy_attachment" "aws_xray_write_only_access" {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
+  #checkov:skip=CKV_AWS_338:CloudWatch log groups retains logs for at least 1 year. too costly, leaving it at 14 days
   count             = var.enable_cloudwatch_logs ? 1 : 0
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.cloudwatch_retention_in_days
