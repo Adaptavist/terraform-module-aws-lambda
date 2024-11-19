@@ -1,3 +1,10 @@
+## [1.35.3](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.2...v1.35.3) (2024-11-19)
+
+
+### Bug Fixes
+
+* checkov fixes ([e2a8e15](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e2a8e155bb09a2a3e316c876a3f3dbf11ace0df1))
+
 ## [1.35.2](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.1...v1.35.2) (2024-10-08)
 
 
