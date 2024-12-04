@@ -1,3 +1,10 @@
+## [1.35.4](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.3...v1.35.4) (2024-12-04)
+
+
+### Bug Fixes
+
+* lambda signing profile name ([9eb2f6d](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/9eb2f6d7cf926912c7db16fb2a62a19ea1087878))
+
 ## [1.35.3](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.2...v1.35.3) (2024-11-19)
 
 
