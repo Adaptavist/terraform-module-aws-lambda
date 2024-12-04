@@ -48,7 +48,7 @@ resource "aws_iam_role" "this" {
 
 resource "aws_signer_signing_profile" "lambda_signing_profile" {
   platform_id = "AWSLambda-SHA384-ECDSA"
-  name        = "${var.namespace}_${var.stage}_sp"
+  name_prefix = "${replace(var.aws_region, "-", "_")}_${replace(var.name, "-", "_")}_"
 
   signature_validity_period {
     value = 5
