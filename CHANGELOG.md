@@ -1,3 +1,11 @@
+## [1.35.5](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.4...v1.35.5) (2025-01-24)
+
+
+### Bug Fixes
+
+* add lifecycle ignore policy to avoid issues with name change ([6fd03a9](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/6fd03a916cd04176735126d5dc3bb30424494b8d))
+* add lifecycle ignore policy to avoid issues with name change ([979263a](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/979263a9616462d361d5eec1637c1f47981e92bf))
+
 ## [1.35.4](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.3...v1.35.4) (2024-12-04)
 
 
