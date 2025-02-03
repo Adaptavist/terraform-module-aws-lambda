@@ -1,3 +1,10 @@
+## [1.35.6](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.5...v1.35.6) (2025-02-03)
+
+
+### Bug Fixes
+
+* remove lambda sp ([e862313](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/e8623139bb46a4300c2d645f84d87f49ff033ac6))
+
 ## [1.35.5](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.4...v1.35.5) (2025-01-24)
 
 
