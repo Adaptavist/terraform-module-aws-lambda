@@ -1,3 +1,10 @@
+## [1.35.7](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.6...v1.35.7) (2025-02-03)
+
+
+### Bug Fixes
+
+* syntax warning ([d97c764](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/d97c7641f76905e385fb596d338876c3cb4b6540))
+
 ## [1.35.6](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.5...v1.35.6) (2025-02-03)
 
 
