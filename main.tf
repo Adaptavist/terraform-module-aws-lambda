@@ -43,32 +43,7 @@ resource "aws_iam_role" "this" {
   name               = local.role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   lifecycle {
-    ignore_changes = [ "name" ]
-  }
-
-  tags = module.labels.tags
-}
-
-resource "aws_signer_signing_profile" "lambda_signing_profile" {
-  platform_id = "AWSLambda-SHA384-ECDSA"
-  name_prefix = "${replace(var.aws_region, "-", "_")}_${replace(var.name, "-", "_")}_"
-
-  signature_validity_period {
-    value = 5
-    type  = "YEARS"
-  }
-
-  tags = module.labels.tags
-}
-
-resource "aws_lambda_code_signing_config" "lambda_signing_config" {
-
-  allowed_publishers {
-    signing_profile_version_arns = [aws_signer_signing_profile.lambda_signing_profile.arn]
-  }
-
-  policies {
-    untrusted_artifact_on_deployment = "Warn"
+    ignore_changes = ["name"]
   }
 
   tags = module.labels.tags
@@ -95,10 +70,8 @@ resource "aws_lambda_function" "this" {
   publish                        = var.publish_lambda
   layers                         = var.layers
 
-  filename = data.archive_file.this.output_path
-
-  source_code_hash        = data.archive_file.this.output_base64sha256
-  code_signing_config_arn = aws_lambda_code_signing_config.lambda_signing_config.arn
+  filename         = data.archive_file.this.output_path
+  source_code_hash = data.archive_file.this.output_base64sha256
 
   dynamic "environment" {
     for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
