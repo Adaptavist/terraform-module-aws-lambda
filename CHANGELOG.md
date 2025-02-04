@@ -1,3 +1,10 @@
+## [1.35.8](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.7...v1.35.8) (2025-02-04)
+
+
+### Bug Fixes
+
+* iam role name ([4607443](http://bitbucket.org/adaptavistlabs/module-aws-lambda/commits/4607443ef145d5661bb180c26f64b22adba7fac2))
+
 ## [1.35.7](http://bitbucket.org/adaptavistlabs/module-aws-lambda/compare/v1.35.6...v1.35.7) (2025-02-03)
 
 
