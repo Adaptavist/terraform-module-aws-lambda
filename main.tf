@@ -14,8 +14,9 @@ module "labels" {
 data "aws_caller_identity" "this" {}
 
 locals {
-  function_name = var.disable_label_function_name_prefix ? var.function_name : "${module.labels.id}-${var.function_name}"
-  role_name     = var.include_region ? "${local.function_name}-${var.aws_region}" : local.function_name
+  function_name  = var.disable_label_function_name_prefix ? var.function_name : "${module.labels.id}-${var.function_name}"
+  full_role_name = var.include_region ? "${local.function_name}-${var.aws_region}" : local.function_name
+  role_name      = substr(local.full_role_name, 0, 63)
 }
 
 // package
@@ -42,9 +43,6 @@ data "aws_iam_policy_document" "assume_role_policy" {
 resource "aws_iam_role" "this" {
   name               = local.role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
-  lifecycle {
-    ignore_changes = [name]
-  }
 
   tags = module.labels.tags
 }
